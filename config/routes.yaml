@@ -1,0 +1,10 @@
+#index:
+#    path: /
+#    controller: App\Controller\DefaultController::index
+affiche:
+      path: /Affiche
+      controller: App\Controller\StudentController::affiche
+
+#afficheName:
+#      path: /AfficheName/{name}
+#      controller: App\Controller\StudentController::afficheName
