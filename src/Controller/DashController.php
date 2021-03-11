@@ -11,6 +11,14 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DashController extends AbstractController
 {
+
+    /**
+     * @Route("/", name="home")
+     */
+    public function home(): Response
+    {
+        return $this->render('dash/home.html.twig');
+    }
     /**
      * @Route("/dash", name="dash")
      */

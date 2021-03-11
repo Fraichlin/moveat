@@ -6,11 +6,16 @@ use App\Repository\MembreRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=MembreRepository::class)
+ * @UniqueEntity(fields={"email"},message="l'email {{ value }} est déjà utilisé")
+ * @UniqueEntity(fields={"login"},message="le username {{ value }} est déjà utilisé")
  */
-class Membre
+class Membre implements UserInterface
 {
     /**
      * @ORM\Id
@@ -21,31 +26,47 @@ class Membre
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Insérer un nom")
+     * @Assert\Length(min=4, max=20, minMessage="Le nom doit avoir 4 caractères au minimum",maxMessage="Le nom doit avoir 20 caractères au maximum")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * * @Assert\NotBlank(message="Insérer un prénom")
+     * @Assert\Length(min=4, max=20, minMessage="Le prenom doit avoir 4 caractères au minimum",maxMessage="Le prenom doit avoir 20 caractères au maximum")
      */
     private $prenom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Insérer une adresse email")
+     * @Assert\Email(message ="l'email {{ value }} n'est pas valide")
      */
     private $email;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="Insérer un username")
+     * @Assert\Length(min=4, max=15, minMessage="Le username doit avoir 4 caractères au minimum",maxMessage="Le login doit avoir 15 caractères au maximum")
      */
     private $login;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * * @Assert\NotBlank(message="Insérer un mot de passe")
+     * @Assert\Length(min=8, minMessage="Le mot de passe doit avoir 8 caractères au minimum")
+     * @Assert\EqualTo(propertyPath="confirm_password", message="Les mots de passe ne correspondent pas")
      */
     private $password;
+    /**
+     * @Assert\EqualTo(propertyPath="password", message="Les mots de passe ne correspondent pas")
+     */
+    private $confirm_password;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * * @Assert\NotBlank(message="Sélectionner votre sexe")
      */
     private $sexe;
 
@@ -60,7 +81,8 @@ class Membre
     private $poids;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Image(mimeTypes={"image/jpeg","image/jpg","image/png"})
      */
     private $photo;
 
@@ -74,9 +96,33 @@ class Membre
      */
     private $rendezVouses;
 
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $dateInscription;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updatedAt;
+
     public function __construct()
     {
         $this->rendezVouses = new ArrayCollection();
+    }
+    /**
+     * @return mixed
+     */
+    public function getConfirmPassword()
+    {
+        return $this->confirm_password;
+    }
+    /**
+     * @param mixed $confirm_password
+     */
+    public function setConfirmPassword($confirm_password): void
+    {
+        $this->confirm_password = $confirm_password;
     }
 
     public function getId(): ?int
@@ -230,6 +276,50 @@ class Membre
                 $rendezVouse->setIdMembre(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getRoles()
+    {
+        return ['ROLE_USER'];
+    }
+
+    public function getSalt()
+    {
+        // TODO: Implement getSalt() method.
+    }
+
+    public function getUsername()
+    {
+        return $this->getLogin();
+    }
+
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
+    public function getDateInscription(): ?\DateTimeInterface
+    {
+        return $this->dateInscription;
+    }
+
+    public function setDateInscription(\DateTimeInterface $dateInscription): self
+    {
+        $this->dateInscription = $dateInscription;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

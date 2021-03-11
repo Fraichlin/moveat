@@ -1,9 +1,9 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
-affiche:
-      path: /Affiche
-      controller: App\Controller\StudentController::affiche
+index:
+      path: /
+      controller: App\Controller\DashController::home
 
 #afficheName:
 #      path: /AfficheName/{name}

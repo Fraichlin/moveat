@@ -1,0 +1,8 @@
+{% extends 'baseFrontend.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block title %}Profil Member{% endblock %}
+
+{% block body %}
+    {{ form_start(form,{attr: {'novalidate': 'novalidate'}}) }}
+    {{ form_end(form) }}
+{% endblock %}

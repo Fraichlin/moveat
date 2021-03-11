@@ -1,0 +1,20 @@
+{% extends 'baseFrontend.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+    {{ form_start(form,{attr: {'novalidate': 'novalidate'}}) }}
+
+    {{ form_row(form.nom) }}
+    {{ form_row(form.prenom) }}
+    {{ form_row(form.login) }}
+    {{ form_row(form.password) }}
+    {{ form_row(form.confirm_password) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.sexe) }}
+    {{ form_row(form.taille) }}
+    {{ form_row(form.poids) }}
+    {{ form_row(form.photo) }}
+
+    {{ form_end(form) }}
+{% endblock %}
