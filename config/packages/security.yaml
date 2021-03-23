@@ -1,52 +1,30 @@
 security:
     encoders:
-        App\Entity\Coach:
-            algorithm: bcrypt
-        App\Entity\Membre:
-            algorithm: bcrypt
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+        App\Entity\User:
+            algorithm: auto
+
     providers:
-        users_in_memory: { memory: null }
-        coach_user:
+        app_user_provider:
             entity:
-                class: App\Entity\Coach
-                property: email
-        member_user:
-            entity:
-                class: App\Entity\Membre
-                property: email
-        all_users:
-            chain:
-                providers: ['coach_user', 'member_user']
+                class: App\Entity\User
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        coach_domain:
-            anonymous: lazy
-            pattern: ^/Coach
-            provider: coach_user
-            form_login:
-                login_path: loginCoach
-                check_path: loginCoach
-                default_target_path: homeCoach
-            logout:
-                path: logoutCoach
-                target: home
-
-        user_domain:
-            anonymous: lazy
-            pattern: ^/Member
-            provider: member_user
-            form_login:
-                login_path: loginMember
-                check_path: loginMember
-                default_target_path: homeMember
-            logout:
-                path: logoutCoach
-                target: home
         main:
             anonymous: lazy
+            provider: app_user_provider
+            form_login:
+                login_path: app_login
+            logout:
+                path: app_logout
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 604800
+                path: /
+            guard:
+                authenticators:
+                    - App\Security\UserLoginAuthenticator
 
 
 
@@ -59,5 +37,6 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-#         - { path: ^/Admin, roles: ROLE_ADMIN }
-#         - { path: ^/Coach, roles: ROLE_USER }
+         - { path: ^/Admin, roles: ROLE_ADMIN }
+         - { path: ^/Coach, roles: ROLE_COACH }
+         - { path: ^/Member, roles: ROLE_MEMBER }

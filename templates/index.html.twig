@@ -1,0 +1,17 @@
+{% extends 'baseFrontend.html.twig' %}
+{#{% form_theme form 'bootstrap_4_layout.html.twig' %}#}
+{% block title %}Index{% endblock %}
+
+{% block body %}
+    <div style="border: 1px solid orangered;background-color: #f1d494;">
+    <h1>bienvenue!!!</h1>
+    <a class="btn btn-success" href="{{ url('registerCoach') }}">S'inscrire en tant que coach</a>
+    <a class="btn btn-success" href="{{ url('registerMember') }}">S'inscrire en tant que Membre</a>
+    {% if app.user %}
+        <a class="btn btn-success" href="{{ url('app_logout') }}">Se déconnecter</a>
+    {% else %}
+        <a class="btn btn-success" href="{{ url('app_login') }}">Se connecter</a>
+        </div>
+    {% endif %}
+
+{% endblock %}

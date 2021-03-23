@@ -33,7 +33,7 @@ class Coach implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * * @Assert\NotBlank(message="Insérer un prénom")
+     * @Assert\NotBlank(message="Insérer un prénom")
      * @Assert\Length(min=4, max=20, minMessage="Le prenom doit avoir 4 caractères au minimum",maxMessage="Le prenom doit avoir 20 caractères au maximum")
      */
     private $prenom;
@@ -47,7 +47,7 @@ class Coach implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * * @Assert\NotBlank(message="Insérer un mot de passe")
+     * @Assert\NotBlank(message="Insérer un mot de passe")
      * @Assert\Length(min=8, minMessage="Le mot de passe doit avoir 8 caractères au minimum")
      * @Assert\EqualTo(propertyPath="confirm_password", message="Les mots de passe ne correspondent pas")
      */
@@ -62,7 +62,7 @@ class Coach implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255)
-     * * @Assert\NotBlank(message="Sélectionner votre sexe")
+     * @Assert\NotBlank(message="Sélectionner votre sexe")
      */
     private $sexe;
 

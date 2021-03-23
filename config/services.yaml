@@ -4,8 +4,12 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
-    repertoire_img: '%kernel.project_dir%/public/upload/images'
-    repertoire_file: '%kernel.project_dir%/public/upload/fichiers'
+    repertoire_img_coach: '%kernel.project_dir%/public/upload/images/coach'
+    repertoire_img_member: '%kernel.project_dir%/public/upload/images/member'
+    repertoire_img_admin: '%kernel.project_dir%/public/upload/images/admin'
+    repertoire_file_coach: '%kernel.project_dir%/public/upload/fichiers/coach'
+    repertoire_file_member: '%kernel.project_dir%/public/upload/fichiers/member'
+
 services:
     # default configuration for services in *this* file
     _defaults:

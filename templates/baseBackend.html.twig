@@ -41,7 +41,7 @@
 
         <div class="top-menu">
             <ul class="nav pull-right top-menu">
-                <li><a class="logout" href="{{ url('login') }}">Se déconnecter</a></li>
+                <li><a class="logout" href="{{ url('logoutCoach') }}">Se déconnecter</a></li>
             </ul>
         </div>
     </header>
@@ -65,34 +65,14 @@
                 <li class="sub-menu">
                     <a class="{% block activation2 %}{% endblock %}" href="javascript:;">
                         <i class="fa fa-desktop"></i>
-                        <span>Nutritionistes</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a href="{{ url('list') }}">Liste</a></li>
-                        <li><a href="{{ url('demandList') }}">Demandes d'inscription</a></li>
-                    </ul>
-                </li>
-                <li class="sub-menu">
-                    <a class="{% block activation3 %}{% endblock %}" href="javascript:;">
-                        <i class="fa fa-desktop"></i>
-                        <span>Coachs sportifs</span>
+                        <span>Coachs</span>
                     </a>
                     <ul class="sub">
                         <li><a href="{{ url('listCoach') }}">Liste</a></li>
-                        <li><a href="{{ url('demandListCoach') }}">Demandes d'inscription</a></li>
+                        <li><a href="{{ url('demandListPsy') }}">Demandes d'inscriptions</a></li>
                     </ul>
                 </li>
-                <li class="sub-menu">
-                    <a class="{% block activation4 %}{% endblock %}" href="javascript:;">
-                        <i class="fa fa-desktop"></i>
-                        <span>Psychothérapeutes</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a href="{{ url('listPsy') }}">Liste</a></li>
-                        <li><a href="{{ url('demandListPsy') }}">Demandes d'inscription</a></li>
-                    </ul>
-                </li>
-                <li class="{% block activation5 %}{% endblock %}" class="sub-menu">
+                <li class="{% block activation3 %}{% endblock %}" class="sub-menu">
                     <a href="{{ url('listMember') }}">
                         <i class="fa fa-desktop"></i>
                         <span>Membres</span>

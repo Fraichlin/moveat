@@ -3,7 +3,7 @@
 
 {% block body %}
     <div style="border: 1px solid orangered;background-color: #f1d494;">
-    <h1>Bienvenue {{ app.user.getLogin }}</h1><br>
+    <h1>Espace Membre ---- Bienvenue {{ app.user.getLogin }}</h1><br>
     {% if not app.user.getPhoto %}
         <button class="btn btn-default" >Pas de photo de profil</button>
     {% else %}

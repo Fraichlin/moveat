@@ -25,15 +25,15 @@ use Symfony\Component\Validator\Constraints\Date;
  */
 class MemberController extends AbstractController
 {
+
     /**
-     * @Route("/member", name="listMember")
+     * @return Response
+     * @Route("/home",name="homeMember")
      */
-    public function index(): Response
-    {
-        return $this->render('member/list.html.twig', [
-            'controller_name' => 'MemberController',
-        ]);
+    public function home(){
+        return $this->render("member/home.html.twig");
     }
+
     /**
      * @Route("/inscription", name="inscriptionMembre")
      */
@@ -72,14 +72,6 @@ class MemberController extends AbstractController
         return $this->render('member/inscription.html.twig',[
             'form' => $form->createView()
         ]);
-    }
-
-    /**
-     * @return Response
-     * @Route("/home",name="homeMember")
-     */
-    public function home(){
-        return $this->render("member/home.html.twig");
     }
 
     /**

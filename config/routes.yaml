@@ -1,9 +1,16 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
-index:
-      path: /
-      controller: App\Controller\DashController::home
+
+homeAdmin:
+      path: /Admin
+      controller: App\Controller\AdminController::home
+homeCoach:
+      path: /Coach
+      controller: App\Controller\CoachController::home
+homeMember:
+      path: /Member
+      controller: App\Controller\MemberController::home
 
 #afficheName:
 #      path: /AfficheName/{name}
