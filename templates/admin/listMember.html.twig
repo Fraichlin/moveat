@@ -4,7 +4,13 @@
 {% block activation3 %}active{% endblock %}
 {% block body %}
     <section class="wrapper">
-        <h3><i class="fa fa-angle-right"></i> Liste - Nutritionistes</h3>
+        {% for flashError in app.flashes('verify_email_error') %}
+            <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+        {% endfor %}
+        {% for flashSuccess in app.flashes('success') %}
+            <div class="alert alert-success" role="alert">{{ flashSuccess }}</div>
+        {% endfor %}
+        <h3><i class="fa fa-angle-right"></i> Liste - Membres</h3>
         <!-- row -->
         <div class="row mt">
             <div class="col-md-12">
@@ -20,19 +26,43 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% for m in members %}
+                        {% for m in member %}
                             <tr>
                                 <td>{{ m.nom }}</td>
                                 <td>{{ m.prenom }}</td>
                                 <td>{{ m.email }} </td>
                                 <td>{{ m.dateInscription | date  }}</td>
-                                <td></td>
-{#                                <td>#}
-{#                                    <button class="btn btn-info btn-xs"><i class="fa fa-eye"></i></button>#}
-{#                                    <form style="display: inline-block" action="{{ url('delete',{'id':n.idCoach}) }}">#}
-{#                                        <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>#}
-{#                                    </form>#}
-{#                                </td>#}
+                                <td>
+                                    <form style="display: inline-block" action="{{ url('profileAdminMember',{'id':m.id}) }}">
+                                        <button title="Visualiser"
+                                                class="btn btn-info btn-xs"><i class="fa fa-eye"></i></button>
+                                    </form>
+                                    {% if m.statut == "unblocked" or m.statut == "actived" %}
+                                        <form id="blockMember" style="display: inline-block" action="{{ url('blockMember',{'id':m.id}) }}">
+                                            <button title="Bloquer" onclick="event.preventDefault();
+                                            confirm('Voulez-vous vraiment bloquer ce membre?') &&
+                                            document.getElementById('blockMember').submit();"
+                                                    class="btn btn-warning btn-xs"><i class="fa fa-lock ">
+                                                </i></button>
+                                        </form>
+                                    {% else %}
+                                        <form id="deblockMember" style="display: inline-block" action="{{ url('unblockMember',{'id':m.id}) }}">
+                                            <button title="Débloquer" onclick="event.preventDefault();
+                                            confirm('Voulez-vous vraiment débloquer ce membre?') &&
+                                            document.getElementById('deblockMember').submit();"
+                                                    class="btn btn-success btn-xs"><i class="fa fa-unlock ">
+                                                </i></button>
+                                        </form>
+                                    {% endif %}
+                                    <form id="deleteMember" style="display: inline-block" action="{{ url('deleteMember',{'id':m.id}) }}">
+                                        <button title="Supprimer" onclick="event.preventDefault();
+                                            confirm('Voulez-vous vraiment supprimer ce membre?') &&
+                                            document.getElementById('deleteMember').submit();"
+                                                class="btn btn-danger btn-xs"><i class="fa fa-trash-o ">
+                                            </i></button>
+                                    </form>
+                                </td>
+
                             </tr>
                         {% endfor %}
 

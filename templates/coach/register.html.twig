@@ -1,9 +1,14 @@
 {% extends 'baseFrontend.html.twig' %}
-{% form_theme form 'bootstrap_4_layout.html.twig' %}
-{% block title %}Inscription{% endblock %}
+
+{% block title %}Inscription coach{% endblock %}
 
 {% block body %}
-    {{ form_start(form,{attr: {'novalidate': 'novalidate'}}) }}
+    <div class="row" style="background-color: #f3d6a0;opacity: 0.9;">
+        <div class="col-lg-8 mx-auto">
+            {{ form_start(form,{attr: {'novalidate': 'novalidate'}}) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        </div>
+    </div>
 
-    {{ form_end(form) }}
 {% endblock %}

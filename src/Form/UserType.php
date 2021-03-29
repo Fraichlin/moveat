@@ -10,7 +10,11 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Vich\UploaderBundle\Form\Type\VichFileType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class UserType extends AbstractType
 {
@@ -51,8 +55,17 @@ class UserType extends AbstractType
 //membre            ->add('poids')
 //coach            ->add('specialite')
 //coach            ->add('adresse')
-            ->add('photo',FileType::class, array('data_class' => null))
-//coach            ->add('justificatif')
+            ->add('imageFile', VichImageType::class, [
+                'label'=>'Photo de profil(JPG ou PNG)',
+                'required' => false,
+                'allow_delete' => true,
+                'delete_label' => 'supprimer',
+                'download_label' => 'télécharger',
+                'download_uri' => true,
+                'image_uri' => true,
+                'asset_helper' => true,
+            ]);
+
 
         ;
     }

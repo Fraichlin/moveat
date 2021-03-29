@@ -4,8 +4,13 @@
 {% block activation2 %}active{% endblock %}
 {% block body %}
     <section class="wrapper">
+        {% for flashError in app.flashes('verify_email_error') %}
+            <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+        {% endfor %}
+        {% for flashSuccess in app.flashes('success') %}
+            <div class="alert alert-success" role="alert">{{ flashSuccess }}</div>
+        {% endfor %}
         <h3><i class="fa fa-angle-right"></i> Liste - Coachs</h3>
-        <!-- row -->
         <div class="row mt">
             <div class="col-md-12">
                 <div class="content-panel">
@@ -13,10 +18,11 @@
                         <thead>
                         <tr>
                             <th>Nom</th>
-                            <th>Prenom</th>
+                            <th>Prénom</th>
                             <th>Email</th>
-                            <th>Specialite</th>
+                            <th>Spécialité</th>
                             <th>Date Inscription</th>
+                            <th>Date Validation</th>
                             <th>Actions</th>
                         </tr>
                         </thead>
@@ -28,13 +34,37 @@
                                 <td>{{ c.email }} </td>
                                 <td>{{ c.specialite }} </td>
                                 <td>{{ c.dateInscription | date  }}</td>
-                                <td></td>
-                                {#                                <td>#}
-                                {#                                    <button class="btn btn-info btn-xs"><i class="fa fa-eye"></i></button>#}
-                                {#                                    <form style="display: inline-block" action="{{ url('delete',{'id':n.idCoach}) }}">#}
-                                {#                                        <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>#}
-                                {#                                    </form>#}
-                                {#                                </td>#}
+                                <td>{{ c.dateValidation | date  }}</td>
+                                    <td>
+                                        <form style="display: inline-block" action="{{ url('profileAdminCoach',{'id':c.id}) }}">
+                                            <button title="Visualiser"
+                                            class="btn btn-info btn-xs"><i class="fa fa-eye"></i></button>
+                                        </form>
+                                        {% if c.statut == "unblocked" or c.statut == "actived" %}
+                                        <form id="blockCoach" style="display: inline-block" action="{{ url('blockCoach',{'id':c.id}) }}">
+                                            <button title="Bloquer" onclick="event.preventDefault();
+                                            confirm('Voulez-vous vraiment bloquer ce coach?') &&
+                                            document.getElementById('blockCoach').submit();"
+                                                    class="btn btn-warning btn-xs"><i class="fa fa-lock ">
+                                                </i></button>
+                                        </form>
+                                        {% else %}
+                                        <form id="deblockCoach" style="display: inline-block" action="{{ url('unblockCoach',{'id':c.id}) }}">
+                                            <button title="Débloquer" onclick="event.preventDefault();
+                                            confirm('Voulez-vous vraiment débloquer ce coach?') &&
+                                            document.getElementById('deblockCoach').submit();"
+                                                    class="btn btn-success btn-xs"><i class="fa fa-unlock ">
+                                                </i></button>
+                                        </form>
+                                        {% endif %}
+                                        <form id="deleteCoach" style="display: inline-block" action="{{ url('deleteCoach',{'id':c.id}) }}">
+                                            <button title="Supprimer" onclick="event.preventDefault();
+                                            confirm('Voulez-vous vraiment supprimer ce coach?') &&
+                                            document.getElementById('deleteCoach').submit();"
+                                                    class="btn btn-danger btn-xs"><i class="fa fa-trash-o ">
+                                                </i></button>
+                                        </form>
+                                    </td>
                             </tr>
                         {% endfor %}
 

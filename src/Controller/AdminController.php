@@ -2,11 +2,16 @@
 
 namespace App\Controller;
 
+use App\Form\AdminType;
 use App\Repository\CoachRepository;
 use App\Repository\MembreRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * Class AdminController
@@ -27,35 +32,204 @@ class AdminController extends AbstractController
 
     /**
      * @return Response
-     * @Route("/login",name="loginAdmin")
+     * @Route("/profile",name="profileAdmin")
      */
-    public function login(){
-        return $this->render('admin/login.html.twig');
-    }
-
-    /**
-     * @return Response
-     * @Route("/listMember",name="listMember")
-     */
-    public function listMember(MembreRepository $repository){
-        $member = $repository->findAll();
-        return $this->render('admin/listMember.html.twig',[
-            'members' => $member
+    public function profileAdmin(UserRepository $repository,Request $request,
+                                 UserPasswordEncoderInterface $encoder){
+        $admin = $repository->findOneBy(['roles'=>['["ROLE_ADMIN"]']]);
+        $form = $this->createForm(AdminType::class,$admin);
+        $form->add('Enregistrer',SubmitType::class);
+        $temp_password = $admin->getPassword();
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            if($admin->getPassword()=='12345678'){
+                $admin->setPassword($temp_password);
+            }
+            else{
+                $hash = $encoder->encodePassword($admin,$admin->getPassword());
+                $admin->setPassword($hash);
+            }
+            $em = $this->getDoctrine()->getManager();
+            $em->flush();
+            $this->addFlash('success','Votre compte a été modifié avec succès');
+            return $this->redirectToRoute('profileAdmin');
+        }
+        return $this->render('admin/profilAdmin.html.twig',[
+            'form' => $form->createView()
         ]);
     }
+
+
+    //*******COACH
 
     /**
      * @return Response
      * @Route("/listCoach",name="listCoach")
      */
-    public function listCoach(CoachRepository $repository){
-        $coach = $repository->findAll();
+    public function listCoach(UserRepository $repository){
+      //dd($repository->findAll());
+        $coach = $repository->findCoachByStatus();
         return $this->render('admin/listCoach.html.twig',[
+            'coach' => $coach
+        ]);
+    }
+    /**
+     * @return Response
+     * @Route("/listDemandCoach",name="listDemandCoach")
+     */
+    public function listDemandCoach(UserRepository $repository){
+        $coach = $repository->findBy(['roles'=>['["ROLE_COACH"]'],'statut'=>'nonactived']);
+        return $this->render('admin/listDemandCoach.html.twig',[
+            'coach' => $coach
+        ]);
+    }
+
+    /**
+     * @Route("/deleteCoach/{id}", name="deleteCoach")
+     */
+    public function deleteCoach($id,UserRepository $repository): Response
+    {
+        $coach = $repository->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($coach);
+        $em->flush();
+        $this->addFlash('success','Le compte a été supprimé avec succès');
+        return $this->redirectToRoute('listCoach');
+    }
+    /**
+     * @Route("/deleteDemandCoach/{id}", name="deleteDemandCoach")
+     */
+    public function deleteDemandCoach($id,UserRepository $repository): Response
+    {
+        $coach = $repository->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($coach);
+        $em->flush();
+        $this->addFlash('success','La demande a été supprimée avec succès');
+        return $this->redirectToRoute('listDemandCoach');
+    }
+
+    /**
+     * @Route("/validateDemandCoach/{id}", name="validateDemandCoach")
+     */
+    public function validateDemandCoach($id,UserRepository $repository): Response
+    {
+        $coach = $repository->find($id);
+        $coach->setStatut("actived");
+        $coach->setUpdatedAt(new \DateTime());
+        $coach->setDateValidation(new \DateTime());
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+        $this->addFlash('success','Le compte a été validé avec succès');
+        return $this->redirectToRoute('listDemandCoach');
+    }
+
+    /**
+     * @Route("/blockCoach/{id}", name="blockCoach")
+     */
+    public function blockCoach($id,UserRepository $repository): Response
+    {
+        $coach = $repository->find($id);
+        $coach->setStatut("blocked");
+        $coach->setDateBlocage(new \DateTime());
+        $coach->setUpdatedAt(new \DateTime());
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+        $this->addFlash('success','Le compte a été bloqué avec succès.');
+        return $this->redirectToRoute('listCoach');
+    }
+
+    /**
+     * @Route("/unblockCoach/{id}", name="unblockCoach")
+     */
+    public function unblockCoach($id,UserRepository $repository): Response
+    {
+        $coach = $repository->find($id);
+        $coach->setStatut("unblocked");
+        $coach->setDateDeblocage(new \DateTime());
+        $coach->setUpdatedAt(new \DateTime());
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+        $this->addFlash('success','Le compte a été débloqué avec succès.');
+        return $this->redirectToRoute('listCoach');
+    }
+
+    /**
+     * @return Response
+     * @Route("/profileCoach/{id}",name="profileAdminCoach")
+     */
+    public function profileAdminCoach($id,UserRepository $repository){
+        $coach = $repository->find($id);
+        return $this->render('admin/profilAdminCoach.html.twig',[
             'coach' => $coach
         ]);
     }
 
 
+//******MEMBER
 
+    /**
+     * @return Response
+     * @Route("/listMember",name="listMember")
+     */
+    public function listMember(UserRepository $repository){
+        $member = $repository->findBy(['roles'=>['["ROLE_MEMBER"]']]);
+        return $this->render('admin/listMember.html.twig',[
+            'member' => $member
+        ]);
+    }
+    /**
+     * @Route("/deleteMember/{id}", name="deleteMember")
+     */
+    public function deleteMember($id,UserRepository $repository): Response
+    {
+        $member = $repository->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($member);
+        $em->flush();
+        $this->addFlash('success','Le compte a été supprimé avec succès');
+        return $this->redirectToRoute('listMember');
+    }
+
+    /**
+     * @Route("/blockMember/{id}", name="blockMember")
+     */
+    public function blockMember($id,UserRepository $repository): Response
+    {
+        $member = $repository->find($id);
+        $member->setStatut("blocked");
+        $member->setDateBlocage(new \DateTime());
+        $member->setUpdatedAt(new \DateTime());
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+        $this->addFlash('success','Le compte a été bloqué avec succès.');
+        return $this->redirectToRoute('listMember');
+    }
+
+    /**
+     * @Route("/unblockMember/{id}", name="unblockMember")
+     */
+    public function unblockMember($id,UserRepository $repository): Response
+    {
+        $member = $repository->find($id);
+        $member->setStatut("unblocked");
+        $member->setDateDeblocage(new \DateTime());
+        $member->setUpdatedAt(new \DateTime());
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+        $this->addFlash('success','Le compte a été débloqué avec succès.');
+        return $this->redirectToRoute('listMember');
+    }
+
+    /**
+     * @return Response
+     * @Route("/profileMember/{id}",name="profileAdminMember")
+     */
+    public function profileAdminMember($id,UserRepository $repository){
+        $member = $repository->find($id);
+        return $this->render('admin/profilAdminMember.html.twig',[
+            'member' => $member
+        ]);
+    }
 
 }

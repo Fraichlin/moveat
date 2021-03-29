@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -16,7 +17,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @UniqueEntity(fields={"username"},message="le username {{ value }} est déjà utilisé")
  * @Vich\Uploadable
  */
-class User implements UserInterface
+class User implements UserInterface,\Serializable
 {
     /**
      * @ORM\Id
@@ -40,7 +41,6 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     * @Assert\NotBlank(message="Insérer un mot de passe")
      * @Assert\Length(min=8, minMessage="Le mot de passe doit avoir 8 caractères au minimum")
      * @Assert\EqualTo(propertyPath="confirm_password", message="Les mots de passe ne correspondent pas")
      */
@@ -80,45 +80,27 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\NotBlank(message="Insérer un numéro")
-     * @Assert\Regex("/^\+216\s\d\d\s\d\d\d\s\d\d\d$/",message="Le numéro doit etre de la forme +216 XX XXX XXX")
+     * @Assert\Regex(pattern="/^\+216\s\d\d\s\d\d\d\s\d\d\d$/",message="Le numéro doit etre de la forme +216 XX XXX XXX")
      */
     private $telephone;
 
     /**
      * @ORM\Column(type="float", nullable=true)
-     * @Assert\NotBlank(message="Insérer votre taille")
-     * @Assert\LessThanOrEqual(
-     *     value = 3
-     * )
-     * @Assert\GreaterThan(
-     *     value = 0.5
-     * )
      */
     private $taille;
 
     /**
      * @ORM\Column(type="float", nullable=true)
-     * @Assert\NotBlank(message="Insérer votre poids")
-     * @Assert\LessThanOrEqual(
-     *     value = 600
-     * )
-     * @Assert\GreaterThan(
-     *     value = 5
-     * )
      */
     private $poids;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\NotBlank(message="Choisissez votre spécialité")
      */
     private $specialite;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\NotBlank(message="Insérer une adresse")
-     * @Assert\Length(min=3, minMessage="L'adresse doit avoir 3 caractères au minimum")
      */
     private $adresse;
 
@@ -129,18 +111,11 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\Image(mimeTypes={"image/jpeg","image/jpg","image/png"},
-     *     mimeTypesMessage = "Sélectionner une image valide")
      */
     private $photo;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Assert\NotBlank(message="Insérer un justificatif")
-     * @Assert\File(maxSize = "1024k",
-     *     mimeTypes={"application/pdf","application/x-pdf"},
-     *     mimeTypesMessage = "Sélectionner un fichier pdf"
-     *     )
      */
     private $justificatif;
 
@@ -157,11 +132,6 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $dateModification;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
     private $dateBlocage;
 
     /**
@@ -170,13 +140,30 @@ class User implements UserInterface
     private $dateDeblocage;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    protected $updatedAt;
+
+    /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
      * @Vich\UploadableField(mapping="user_images", fileNameProperty="photo")
-     *
      * @var File|null
      */
     private $imageFile;
+    /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     * @Vich\UploadableField(mapping="user_files", fileNameProperty="justificatif")
+     * @var File|null
+     */
+    private $genericFile;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isVerified = false;
+
+
 
 
     public function getId(): ?int
@@ -418,17 +405,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getDateModification(): ?\DateTimeInterface
-    {
-        return $this->dateModification;
-    }
-
-    public function setDateModification(?\DateTimeInterface $dateModification): self
-    {
-        $this->dateModification = $dateModification;
-
-        return $this;
-    }
 
     public function getDateBlocage(): ?\DateTimeInterface
     {
@@ -477,12 +453,88 @@ class User implements UserInterface
         if (null !== $imageFile) {
             // It is required that at least one field changes if you are using doctrine
             // otherwise the event listeners won't be called and the file is lost
-            $this->setDateModification(new \DateTimeImmutable);
+            $this->setUpdatedAt(new \DateTimeImmutable);
         }
     }
 
     public function getImageFile(): ?File
     {
         return $this->imageFile;
+    }
+
+    /**
+     * @param File|\Symfony\Component\HttpFoundation\File\UploadedFile|null $genericFile
+     */
+    public function setGenericFile(?File $genericFile = null): void
+    {
+        $this->genericFile = $genericFile;
+
+        if (null !== $genericFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->setUpdatedAt(new \DateTimeImmutable);
+        }
+    }
+
+    public function getGenericFile(): ?File
+    {
+        return $this->genericFile;
+    }
+
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt
+            ) = unserialize($serialized);
+    }
+
+    /**
+     * @return string
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param string $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
+    public function getIsVerified(): ?bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
     }
 }

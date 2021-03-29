@@ -1,0 +1,193 @@
+{% extends 'baseBackend.html.twig' %}
+
+{% block title %}Profile{% endblock %}
+{% block body %}
+    <section class="wrapper site-min-height">
+        <h3><i class="fa fa-angle-right"></i> Profil - Coach</h3><a style="size: 12px;" class="fa fa-arrow-left" href="{{ app.request.headers.get('referer') }}">Retour</a>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    {% if not coach.photo %}
+                        <img style="width: 200px;height: 200px;" src="{{ asset( 'img/profilUser.png' ) }}" class="img-circle" alt="">
+                    {% else %}
+                        <img style="width: 200px;height: 200px;" src="{{ asset( 'upload/images/' ~ coach.photo ) }}" class="img-circle"  alt="">
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                    <h4>
+                        {{ coach.prenom }} {{ coach.nom }}
+                    </h4>
+                    <h5>
+                        {{ coach.specialite }}
+                    </h5>
+                    <p class="proile-rating">Note générale : <span>8/10</span></p>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" aria-selected="true">A propos</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                {% if coach.statut == "unblocked" or coach.statut == "actived" %}
+                <form id="blockCoach" style="display: inline-block" action="{{ url('blockCoach',{'id':coach.id}) }}">
+                    <button class="btn btn-danger" title="Bloquer" onclick="event.preventDefault();
+                                            confirm('Voulez-vous vraiment bloquer ce coach?') &&
+                                            document.getElementById('blockCoach').submit();">
+                        <i class="fa fa-lock ">
+                        </i></button>
+                </form>
+                    <form id="deleteDemand" style="display: inline-block" action="{{ url('deleteDemandCoach',{'id':coach.id}) }}">
+                        <button class="btn btn-warning" title="Supprimer" onclick="event.preventDefault();
+                                            confirm('Voulez-vous vraiment supprimer cette demande?') &&
+                                            document.getElementById('deleteDemand').submit();"
+                                class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                    </form>
+                {% elseif coach.statut == "blocked"%}
+                <form id="deblockCoach" style="display: inline-block" action="{{ url('unblockCoach',{'id':coach.id}) }}">
+                    <button class="btn btn-success" title="Débloquer" onclick="event.preventDefault();
+                                            confirm('Voulez-vous vraiment débloquer ce coach?') &&
+                                            document.getElementById('deblockCoach').submit();"
+                            class="btn btn-success btn-xs"><i class="fa fa-unlock ">
+                        </i></button>
+                </form>
+                {% endif %}
+                {% if coach.statut == "nonactived"%}
+                <form id="validateDemand" style="display: inline-block" action="{{ url('validateDemandCoach',{'id':coach.id}) }}">
+                    <button class="btn btn-success" title="Valider" onclick="event.preventDefault();
+                                            confirm('Voulez-vous vraiment valider cette demande?') &&
+                                            document.getElementById('validateDemand').submit();"
+                            class="btn btn-success btn-xs"><i class="fa fa-check "></i></button>
+                </form>
+                <form id="deleteDemand" style="display: inline-block" action="{{ url('deleteDemandCoach',{'id':coach.id}) }}">
+                    <button class="btn btn-warning" title="Supprimer" onclick="event.preventDefault();
+                                            confirm('Voulez-vous vraiment supprimer cette demande?') &&
+                                            document.getElementById('deleteDemand').submit();"
+                            class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                </form>
+                {% endif %}
+            </div>
+        </div>
+        <div style="margin-top: -30px;" class="row">
+            <div class="col-md-4">
+
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Nom</b></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{ coach.nom }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Prénom</b></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{ coach.prenom }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Username</b></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{ coach.username }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Email</b></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{ coach.email }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Sexe</b></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{ coach.sexe }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Téléphone</b></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{ coach.telephone }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Adresse</b></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{ coach.adresse }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Statut</b></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{ coach.statut }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Justificatif</b></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p><a target="_blank" href="{{ asset( 'upload/fichiers/' ~ coach.justificatif ) }}">Ouvrir fichier</a></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Date inscription</b></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{ coach.dateInscription | date}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Date validation</b></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{ coach.dateValidation | date }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Dernière date modification</b></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{ coach.updatedAt | date}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Dernière date blocage</b></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{ coach.dateBlocage | date }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Dernière date déblocage</b></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{ coach.dateDeblocage | date }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

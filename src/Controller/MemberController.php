@@ -9,7 +9,9 @@ use App\Form\MemberType;
 use App\Repository\AdministrateurRepository;
 use App\Repository\CoachRepository;
 use App\Repository\MembreRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,100 +29,53 @@ class MemberController extends AbstractController
 {
 
     /**
-     * @return Response
-     * @Route("/home",name="homeMember")
+     * @Route("/home", name="homeMember")
      */
-    public function home(){
-        return $this->render("member/home.html.twig");
+    public function home(): Response
+    {
+        return $this->render('member/home.html.twig');
     }
 
     /**
-     * @Route("/inscription", name="inscriptionMembre")
+     * @Route("/delete/{id}", name="deleteProfileMember")
      */
-    public function inscription(Request $request,MembreRepository $repository,
-                                UserPasswordEncoderInterface $encoder): Response
+    public function delete($id,UserRepository $repository): Response
     {
-        $membre = new Membre();
-        $form = $this->createForm(MemberType::class,$membre);
-        $form->add('Inscription',SubmitType::class);
+        $member = $repository->find($id);
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($member);
+        $em->flush();
+        $this->addFlash('success','Votre compte a été supprimé avec succès');
+        return $this->render("index.html.twig");
+    }
+    /**
+     * @return Response
+     * @Route("/updateProfile/{id}",name="updateProfileMember")
+     */
+    public function updateProfil($id, UserRepository $repository,Request $request,UserPasswordEncoderInterface $encoder){
+        $member= $repository->find($id);
+        $form = $this->createForm(MemberType::class,$member);
+        $form->add('Enregistrer',SubmitType::class);
+        $temp_password =$member->getPassword();
         $form->handleRequest($request);
         if($form->isSubmitted()&& $form->isValid() ){
-            $hash = $encoder->encodePassword($membre,$membre->getPassword());
-            $membre->setPassword($hash);
-            $photo = $form->get('photo')->getData();
-
-            if ($photo) {
-                $nomPhoto = 'photoMembre'.'-'.uniqid().'.'.$photo->guessExtension();
-                try {
-                    $photo->move(
-                        $this->getParameter('repertoire_img'),
-                        $nomPhoto
-                    );
-                } catch (FileException $e) {
-
-                }
-                $membre->setPhoto($nomPhoto);
+            if($member->getPassword()=='12345678'){
+                $member->setPassword($temp_password);
             }
-            $membre->setDateInscription(new \DateTime());
-            $em = $this->getDoctrine()->getManager();
-
-            $em->persist($membre);
-            $em->flush();
-           return $this->redirectToRoute('loginMember');
-        }
-
-        return $this->render('member/inscription.html.twig',[
-            'form' => $form->createView()
-        ]);
-    }
-
-    /**
-     * @return Response
-     * @Route("/login",name="loginMember")
-     */
-    public function login(){
-        return $this->render("member/login.html.twig");
-    }
-
-    /**
-     * @return Response
-     * @Route("/logout",name="logoutMember")
-     */
-    public function logout(){
-    }
-
-    /**
-     * @return Response
-     * @Route("/updateProfil/{id}",name="updateProfilMember")
-     */
-    public function updateProfil($id, MembreRepository $repository,Request $request,UserPasswordEncoderInterface $encoder){
-        $membre = $repository->find($id);
-        $form = $this->createForm(MemberType::class,$membre);
-        $form->add('Enregistrer',SubmitType::class);
-        $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()){
-            $hash = $encoder->encodePassword($membre,$membre->getPassword());
-            $membre->setPassword($hash);
-            $membre->setUpdatedAt(new \DateTime());
-            $photo = $form->get('photo')->getData();
-            if ($photo) {
-                $nomPhoto = 'photoCoach'.'-'.uniqid().'.'.$photo->guessExtension();
-                try {
-                    $photo->move(
-                        $this->getParameter('repertoire_img'),
-                        $nomPhoto
-                    );
-                } catch (FileException $e) {
-
-                }
-                $membre->setPhoto($nomPhoto);
+            else{
+                $hash = $encoder->encodePassword($member,$member->getPassword());
+                $member->setPassword($hash);
             }
+            $member->setUpdatedAt(new \DateTime());
             $em = $this->getDoctrine()->getManager();
             $em->flush();
+            $this->addFlash('success','Votre compte a été modifié avec succès');
             return $this->redirectToRoute('homeMember');
         }
-        return $this->render('member/profil.html.twig',[
+
+        return $this->render('member/updateProfile.html.twig',[
             'form' => $form->createView(),
+            'user'=>$member
         ]);
     }
 }

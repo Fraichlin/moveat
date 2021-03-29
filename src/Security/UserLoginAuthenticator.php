@@ -111,6 +111,7 @@ class UserLoginAuthenticator extends AbstractFormLoginAuthenticator implements P
         if($token->getUser()->getRoles()[0] == "ROLE_MEMBER")
             return new RedirectResponse($this->urlGenerator->generate('homeMember'));
 
+        return new RedirectResponse($this->urlGenerator->generate('app_login'));
     }
 
     protected function getLoginUrl()

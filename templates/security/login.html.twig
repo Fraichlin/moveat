@@ -3,27 +3,40 @@
 {% block title %}Se connecter{% endblock %}
 
 {% block body %}
-    <div id="login-page">
-        <div class="container">
+    <div class="row" style="background-color: #f3d6a0;opacity: 0.9;">
+        <div class="col-lg-8 mx-auto">
             <form method="post" novalidate>
                 {% if error %}
                     <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                 {% endif %}
-                <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+                {% for flashError in app.flashes('verify_email_error') %}
+                    <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+                {% endfor %}
+                {% for flashSuccess in app.flashes('success') %}
+                    <div class="alert alert-success" role="alert">{{ flashSuccess }}</div>
+                {% endfor %}
+                <h1 class="h3 mb-3 font-weight-normal">Veuillez vous connecter</h1>
                 <label for="inputEmail">Email Or Username</label>
                 <input type="text" value="{{ last_username }}" name="username" id="inputEmail" class="form-control" required autofocus>
                 <label for="inputPassword">Password</label>
                 <input type="password" name="password" id="inputPassword" class="form-control" required>
                 <input type="hidden" name="_csrf_token"
                        value="{{ csrf_token('authenticate') }}">
+
                 <div class="checkbox mb-3">
                     <label>
                         <input type="checkbox" name="_remember_me"> Remember me
                     </label>
+                    <a style="float: right;" href="{{ url('app_forgot_password_request') }}">Mot de passe oublié ?</a>
                 </div>
+
+
                 <button class="btn btn-lg btn-primary" type="submit">
                     Sign in
                 </button>
+                <p class="mt-5 mb-3 text-center text-muted">
+                    Pas encore inscrit? <a href="{{ url('index') }}">Créer un compte ici</a>
+                </p>
             </form>
         </div>
     </div>

@@ -1,0 +1,69 @@
+{% extends 'baseBackend.html.twig' %}
+
+{% block title %}Coachs{% endblock %}
+{% block activation2 %}active{% endblock %}
+{% block body %}
+    <section class="wrapper">
+        {% for flashError in app.flashes('verify_email_error') %}
+            <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+        {% endfor %}
+        {% for flashSuccess in app.flashes('success') %}
+            <div class="alert alert-success" role="alert">{{ flashSuccess }}</div>
+        {% endfor %}
+        <h3><i class="fa fa-angle-right"></i> Liste - Coachs - Demandes d'inscription </h3>
+        <!-- row -->
+        <div class="row mt">
+            <div class="col-md-12">
+                <div class="content-panel">
+                    <table class="table table-striped table-advance table-hover">
+                        <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prenom</th>
+                            <th>Email</th>
+                            <th>Specialite</th>
+                            <th>Date Inscription</th>
+                            <th>Justificatif</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for c in coach %}
+                            <tr>
+                                <td>{{ c.nom }}</td>
+                                <td>{{ c.prenom }}</td>
+                                <td>{{ c.email }} </td>
+                                <td>{{ c.specialite }} </td>
+                                <td>{{ c.dateInscription | date  }}</td>
+                                <td><a target="_blank" href="{{ asset( 'upload/fichiers/' ~ c.justificatif ) }}">Ouvrir fichier</a></td>
+                                    <td>
+                                        <form style="display: inline-block" action="{{ url('profileAdminCoach',{'id':c.id}) }}">
+                                            <button title="Visualiser"
+                                                    class="btn btn-info btn-xs"><i class="fa fa-eye"></i></button>
+                                        </form>
+                                        <form id="validateDemand" style="display: inline-block" action="{{ url('validateDemandCoach',{'id':c.id}) }}">
+                                            <button title="Valider" onclick="event.preventDefault();
+                                            confirm('Voulez-vous vraiment valider cette demande?') &&
+                                            document.getElementById('validateDemand').submit();"
+                                                    class="btn btn-success btn-xs"><i class="fa fa-check "></i></button>
+                                        </form>
+                                        <form id="deleteDemand" style="display: inline-block" action="{{ url('deleteDemandCoach',{'id':c.id}) }}">
+                                            <button title="Supprimer" onclick="event.preventDefault();
+                                            confirm('Voulez-vous vraiment supprimer cette demande?') &&
+                                            document.getElementById('deleteDemand').submit();"
+                                                    class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
+                                        </form>
+                                    </td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /content-panel -->
+            </div>
+            <!-- /col-md-12 -->
+        </div>
+        <!-- /row -->
+    </section>
+{% endblock %}

@@ -1,0 +1,144 @@
+{% extends 'baseBackend.html.twig' %}
+
+{% block title %}Profile{% endblock %}
+{% block body %}
+    <section class="wrapper site-min-height">
+        <h3><i class="fa fa-angle-right"></i> Profil - Membre</h3><a style="size: 12px;" class="fa fa-arrow-left" href="{{ app.request.headers.get('referer') }}">Retour</a>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    {% if not member.photo %}
+                        <img style="width: 200px;height: 200px;" src="{{ asset( 'img/profilUser.png' ) }}" class="img-circle" alt="">
+                    {% else %}
+                        <img style="width: 200px;height: 200px;" src="{{ asset( 'upload/images/' ~ member.photo ) }}" class="img-circle"  alt="">
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                    <h4>
+                        {{ member.prenom }} {{ member.nom }}
+                    </h4>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" aria-selected="true">A propos</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                {% if member.statut == "unblocked" or member.statut == "actived" %}
+                    <form id="blockMembre" style="display: inline-block" action="{{ url('blockMember',{'id':member.id}) }}">
+                        <button class="btn btn-danger" title="Bloquer" onclick="event.preventDefault();
+                                            confirm('Voulez-vous vraiment bloquer ce Membre?') &&
+                                            document.getElementById('blockMembre').submit();">
+                            Bloquer</button>
+                    </form>
+                {% else %}
+                    <form id="deblockMembre" style="display: inline-block" action="{{ url('unblockMember',{'id':member.id}) }}">
+                        <button class="btn btn-success" title="Débloquer" onclick="event.preventDefault();
+                                            confirm('Voulez-vous vraiment débloquer ce Membre?') &&
+                                            document.getElementById('deblockMembre').submit();"
+                                class="btn btn-success btn-xs"><i class="fa fa-unlock ">
+                            </i></button>
+                    </form>
+                {% endif %}
+            </div>
+        </div>
+        <div style="margin-top: -90px;" class="row">
+            <div class="col-md-4">
+
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Nom</b></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{member.nom }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Prénom</b></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{member.prenom }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Username</b></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{member.username }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Email</b></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{member.email }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Sexe</b></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{member.sexe }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Statut</b></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{member.statut }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Date inscription</b></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{member.dateInscription | date}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Date validation</b></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{member.dateValidation | date }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Dernière date modification</b></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{member.updatedAt | date}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Dernière date blocage</b></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{member.dateBlocage | date }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Dernière date déblocage</b></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{member.dateDeblocage | date }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

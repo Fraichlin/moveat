@@ -54,17 +54,22 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
     */
 
-    /*
-    public function findOneBySomeField($value): ?User
+    /**
+     * @param $value
+     * @param $value1
+     * @return User[] Returns an array of User objects
+     */
+    public function findByRoles($value,$value1)
     {
         return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
+            ->andWhere('u.roles = :val AND u.statut = :val1')
+            ->setParameter('val', (array)$value)
+            ->setParameter('val1', $value1)
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
         ;
     }
-    */
+
     public function loadUserByUsername($usernameOrEmail)
     {
         return $this->createQueryBuilder('u')
@@ -73,4 +78,19 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    public function findCoachByStatus()
+    {
+        return $this->createQueryBuilder('u')
+            ->andWhere('u.roles = :val AND (u.statut = :val1 OR u.statut = :val2 OR u.statut = :val3)')
+            ->setParameter('val', ['["ROLE_COACH"]'])
+            ->setParameter('val1', 'actived')
+            ->setParameter('val2', 'blocked')
+            ->setParameter('val3', 'unblocked')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+
 }

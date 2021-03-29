@@ -3,21 +3,29 @@
 
 {% block body %}
     <div style="border: 1px solid orangered;background-color: #f1d494;">
+        {% for flashError in app.flashes('verify_email_error') %}
+            <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+        {% endfor %}
+        {% for flashSuccess in app.flashes('success') %}
+            <div class="alert alert-success" role="alert">{{ flashSuccess }}</div>
+        {% endfor %}
         <h1>Espace Coach ---- Bienvenue {{ app.user.getUsername }}</h1><br>
         {% if not app.user.getPhoto %}
-            <button class="btn btn-default" >Pas de photo de profil</button>
+            <img src="{{ asset( 'img/profilUser.png' ) }}" class="img-circle" width="80" alt="">
         {% else %}
-            <img src="{{ asset( 'upload/images/coach/' ~ app.user.getPhoto ) }}" class="img-circle" width="80">
+            <img src="{{ asset( 'upload/images/' ~ app.user.getPhoto ) }}" class="img-circle" width="80">
         {% endif %}
-        <a class="btn btn-info" href="{{ url('profileCoach',{'id':app.user.getId}) }}">
-            Voir mon profil
-        </a>
         <a class="btn btn-info" href="{{ url('updateProfileCoach',{'id':app.user.getId}) }}">
             Modifier mon profil
         </a>
-        <a class="btn btn-info" href="{{ url('deleteProfileCoach',{'id':app.user.getId}) }}">
-            Supprimer mon compte
-        </a>
+        <form id="deleteCoach" style="display: inline-block" action="{{ url('deleteProfileCoach',{'id':app.user.getId}) }}">
+            <button class="btn btn-info" onclick="event.preventDefault();
+        confirm('Voulez-vous vraiment supprimer votre compte?' +
+         ' Toutes vos informations seront supprimées et vous ne pourriez plus vous connecter.') &&
+        document.getElementById('deleteCoach').submit();">
+                Supprimer mon compte
+            </button>
+        </form>
         <a class="btn btn-success" href="{{ url('app_logout') }}">Se deconnecter</a>
     </div>
 {% endblock %}

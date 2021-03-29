@@ -1,0 +1,48 @@
+{% extends 'baseBackend.html.twig' %}
+
+{% block title %}Profile{% endblock %}
+{% block body %}
+    <section class="wrapper site-min-height">
+        {% for flashError in app.flashes('verify_email_error') %}
+            <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+        {% endfor %}
+        {% for flashSuccess in app.flashes('success') %}
+            <div class="alert alert-success" role="alert">{{ flashSuccess }}</div>
+        {% endfor %}
+        <h3><i class="fa fa-angle-right"></i> Profil - Administrateur</h3><a style="size: 12px;" class="fa fa-arrow-left" href="{{ app.request.headers.get('referer') }}">Retour</a>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    {% if not app.user.getPhoto %}
+                        <img style="width: 200px;height: 200px;" src="{{ asset( 'img/profilUser.png' ) }}" class="img-circle" alt="">
+                    {% else %}
+                        <img style="width: 200px;height: 200px;" src="{{ asset( 'upload/images/' ~ app.user.getPhoto ) }}" class="img-circle"  alt="">
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                    <h4>
+                        {{ app.user.getPrenom }} {{ app.user.getNom }}
+                    </h4>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" aria-selected="true">Modifier profil</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            </div>
+        </div>
+        <div style="margin-top: -100px;" class="row">
+            <div class="col-md-4">
+
+            </div>
+            <div class="col-md-6">
+                {{ form_start(form,{attr: {'novalidate': 'novalidate'}}) }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </section>
+{% endblock %}
