@@ -39,7 +39,7 @@
                                     </form>
                                     {% if m.statut == "unblocked" or m.statut == "actived" %}
                                         <form id="blockMember" style="display: inline-block" action="{{ url('blockMember',{'id':m.id}) }}">
-                                            <button title="Bloquer" onclick="event.preventDefault();
+                                            <button title="Bloquer" onclick="
                                             confirm('Voulez-vous vraiment bloquer ce membre?') &&
                                             document.getElementById('blockMember').submit();"
                                                     class="btn btn-warning btn-xs"><i class="fa fa-lock ">
@@ -47,7 +47,7 @@
                                         </form>
                                     {% else %}
                                         <form id="deblockMember" style="display: inline-block" action="{{ url('unblockMember',{'id':m.id}) }}">
-                                            <button title="Débloquer" onclick="event.preventDefault();
+                                            <button title="Débloquer" onclick="
                                             confirm('Voulez-vous vraiment débloquer ce membre?') &&
                                             document.getElementById('deblockMember').submit();"
                                                     class="btn btn-success btn-xs"><i class="fa fa-unlock ">
@@ -55,7 +55,7 @@
                                         </form>
                                     {% endif %}
                                     <form id="deleteMember" style="display: inline-block" action="{{ url('deleteMember',{'id':m.id}) }}">
-                                        <button title="Supprimer" onclick="event.preventDefault();
+                                        <button title="Supprimer" onclick="
                                             confirm('Voulez-vous vraiment supprimer ce membre?') &&
                                             document.getElementById('deleteMember').submit();"
                                                 class="btn btn-danger btn-xs"><i class="fa fa-trash-o ">

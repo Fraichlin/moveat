@@ -116,9 +116,8 @@ class UserController extends AbstractController
             );
             // do anything else you need here, like send an email
             $this->addFlash('success', 'Votre compte a été créé avec succès.
-            Vous recevrez un mail pour vérifier votre adresse email. Vous ne pourriez vous connecter que lorsque 
-            votre compte sera activé par 
-            l\'administrateur');
+            Vous recevrez un mail pour vérifier votre adresse email. Vous recevrez également un mail 
+            de la validation ou non de votre demande d\'inscription');
             return $this->redirectToRoute('app_login');
         }
 

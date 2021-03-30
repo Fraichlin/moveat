@@ -42,13 +42,13 @@
                                                     class="btn btn-info btn-xs"><i class="fa fa-eye"></i></button>
                                         </form>
                                         <form id="validateDemand" style="display: inline-block" action="{{ url('validateDemandCoach',{'id':c.id}) }}">
-                                            <button title="Valider" onclick="event.preventDefault();
+                                            <button title="Valider" onclick="
                                             confirm('Voulez-vous vraiment valider cette demande?') &&
                                             document.getElementById('validateDemand').submit();"
                                                     class="btn btn-success btn-xs"><i class="fa fa-check "></i></button>
                                         </form>
                                         <form id="deleteDemand" style="display: inline-block" action="{{ url('deleteDemandCoach',{'id':c.id}) }}">
-                                            <button title="Supprimer" onclick="event.preventDefault();
+                                            <button title="Supprimer" onclick="
                                             confirm('Voulez-vous vraiment supprimer cette demande?') &&
                                             document.getElementById('deleteDemand').submit();"
                                                     class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>
