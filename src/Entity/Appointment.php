@@ -28,19 +28,26 @@ class Appointment
     private $prenom;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
+     */
+    private $email;
+
+    /**
+     * @ORM\Column(type="string", length=255)
      */
     private $tel;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="string", length=255)
      */
-    private $rendezvous;
+    private $date;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $commentaire;
+    private $message;
+
+    protected $captchaCode;
 
     public function getId(): ?int
     {
@@ -71,39 +78,64 @@ class Appointment
         return $this;
     }
 
-    public function getTel(): ?int
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    public function getTel(): ?string
     {
         return $this->tel;
     }
 
-    public function setTel(int $tel): self
+    public function setTel(string $tel): self
     {
         $this->tel = $tel;
 
         return $this;
     }
 
-    public function getRendezvous(): ?\DateTimeInterface
+    public function getDate(): ?string
     {
-        return $this->rendezvous;
+        return $this->date;
     }
 
-    public function setRendezvous(\DateTimeInterface $rendezvous): self
+    public function setDate(string $date): self
     {
-        $this->rendezvous = $rendezvous;
+        $this->date = $date;
 
         return $this;
     }
 
-    public function getCommentaire(): ?string
+    public function getMessage(): ?string
     {
-        return $this->commentaire;
+        return $this->message;
     }
 
-    public function setCommentaire(?string $commentaire): self
+    public function setMessage(?string $message): self
     {
-        $this->commentaire = $commentaire;
+        $this->message = $message;
 
         return $this;
     }
+
+
+    public function getCaptchaCode()
+    {
+        return $this->captchaCode;
+    }
+
+    public function setCaptchaCode($captchaCode)
+    {
+        $this->captchaCode = $captchaCode;
+    }
+
+
 }

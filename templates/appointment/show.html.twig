@@ -1,0 +1,60 @@
+{% extends 'baseBackend.html.twig' %}
+
+{% block title %}Appointment{% endblock %}
+
+{% block body %}
+    <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i> List RDV</h3>
+        <!-- row -->
+        <div class="row mt">
+            <div class="col-md-12">
+                <div class="content-panel">
+    <h1>Appointment</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ appointment.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ appointment.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prenom</th>
+                <td>{{ appointment.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ appointment.email }}</td>
+            </tr>
+            <tr>
+                <th>Tel</th>
+                <td>{{ appointment.tel }}</td>
+            </tr>
+            <tr>
+                <th>Date</th>
+                <td>{{ appointment.date }}</td>
+            </tr>
+            <tr>
+                <th>Message</th>
+                <td>{{ appointment.message }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('appointment_index') }}">back to list</a>
+
+    <a href="{{ path('appointment_edit', {'id': appointment.id}) }}">edit</a>
+
+    {{ include('appointment/_delete_form.html.twig') }}
+
+    </div>
+    <!-- /content-panel -->
+    </div>
+    <!-- /col-md-12 -->
+    </div>
+    <!-- /row -->
+    </section>
+{% endblock %}

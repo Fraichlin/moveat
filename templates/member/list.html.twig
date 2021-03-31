@@ -1,0 +1,51 @@
+{% extends 'baseBackend.html.twig' %}
+
+{% block title %}Membres{% endblock %}
+{% block activation5 %}active{% endblock %}
+{% block body %}
+    <section class="wrapper">
+        <h3><i class="fa fa-angle-right"></i> Liste - Membres</h3>
+        <!-- row -->
+        <div class="row mt">
+            <div class="col-md-12">
+                <div class="content-panel">
+                    <table class="table table-striped table-advance table-hover">
+                        <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Prenom</th>
+                            <th>Adresse</th>
+                            <th>Telephone</th>
+                            <th>Date Inscription</th>
+                            <th>Certification</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+{#                        {% for n in nutritionist %}#}
+{#                            <tr>#}
+{#                                <td>{{ n.nom }}</td>#}
+{#                                <td>{{ n.prenom }}</td>#}
+{#                                <td>{{ n.adresse }} </td>#}
+{#                                <td>{{ n.telephone }}</td>#}
+{#                                <td>{{ n.dateInscription | date  }}</td>#}
+{#                                <td></td>#}
+{#                                <td>#}
+{#                                    <button class="btn btn-info btn-xs"><i class="fa fa-eye"></i></button>#}
+{#                                    <form style="display: inline-block" action="{{ url('delete',{'id':n.idCoach}) }}">#}
+{#                                        <button class="btn btn-danger btn-xs"><i class="fa fa-trash-o "></i></button>#}
+{#                                    </form>#}
+{#                                </td>#}
+{#                            </tr>#}
+{#                        {% endfor %}#}
+
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /content-panel -->
+            </div>
+            <!-- /col-md-12 -->
+        </div>
+        <!-- /row -->
+    </section>
+{% endblock %}

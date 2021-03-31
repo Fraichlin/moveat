@@ -1,0 +1,59 @@
+{% extends 'baseBackend.html.twig' %}
+
+{% block title %}Appointment index{% endblock %}
+
+{% block body %}
+<section class="wrapper">
+    <h3><i class="fa fa-angle-right"></i> List RDV</h3>
+    <!-- row -->
+    <div class="row mt">
+        <div class="col-md-12">
+            <div class="content-panel">
+
+    <h1>Appointment List</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Prenom</th>
+                <th>Email</th>
+                <th>Tel</th>
+                <th>Date</th>
+                <th>Message</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for appointment in appointments %}
+            <tr>
+                <td>{{ appointment.id }}</td>
+                <td>{{ appointment.nom }}</td>
+                <td>{{ appointment.prenom }}</td>
+                <td>{{ appointment.email }}</td>
+                <td>{{ appointment.tel }}</td>
+                <td>{{ appointment.date }}</td>
+                <td>{{ appointment.message }}</td>
+                <td>
+                    <a href="{{ path('appointment_show', {'id': appointment.id}) }}">show</a>
+                    <a href="{{ path('appointment_edit', {'id': appointment.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+            </div>
+            <!-- /content-panel -->
+        </div>
+        <!-- /col-md-12 -->
+    </div>
+    <!-- /row -->
+</section>
+{% endblock %}
