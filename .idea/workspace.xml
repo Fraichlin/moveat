@@ -19,7 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="913f35bb-4d95-4842-bb2e-dc64dbd79ecb" name="Default Changelist" comment="back and front" />
+    <list default="true" id="913f35bb-4d95-4842-bb2e-dc64dbd79ecb" name="Default Changelist" comment="back and front">
+      <change beforePath="$PROJECT_DIR$/templates/home/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home/index.html.twig" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -212,8 +214,6 @@
       <workItem from="1616747200427" duration="1881000" />
       <workItem from="1617095282407" duration="9914000" />
       <workItem from="1617178184487" duration="17422000" />
-      <workItem from="1617215131552" duration="699000" />
-      <workItem from="1617216868483" duration="223000" />
     </task>
     <task id="LOCAL-00001" summary="teleconsultation controller">
       <created>1614547077121</created>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{% block title %}MovEat{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.css"
+          integrity="sha256-uq9PNlMzB+1h01Ij9cx7zeE2OR2pLAfRw3uUUOOPKdA=" crossorigin="anonymous">
+    {% block css%}
+        <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+
+        <link rel="stylesheet" href="{{asset('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')}}">
+
+        <link rel="stylesheet" href="{{asset('css/animate.css')}}">
+
+        <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
+        <link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
+        <link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}">
+
+        <link rel="stylesheet" href="{{asset('css/bootstrap-datepicker.css')}}">
+        <link rel="stylesheet" href="{{asset('css/jquery.timepicker.css')}}">
+
+        <link rel="stylesheet" href="{{asset('css/flaticon.css')}}">
+        <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    {% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.5.1/main.min.js"
+            integrity="sha256-rPPF6R+AH/Gilj2aC00ZAuB2EKmnEjXlEWx5MkAp7bw=" crossorigin="anonymous"></script>
+    {% block js %}
+        <script src="{{asset('js/jquery.min.js')}}"></script>
+        <script src="{{asset('js/jquery-migrate-3.0.1.min.js')}}"></script>
+        <script src="{{asset('js/popper.min.js')}}"></script>
+        <script src="{{asset('js/bootstrap.min.js')}}"></script>
+        <script src="{{asset('js/jquery.easing.1.3.js')}}"></script>
+        <script src="{{asset('js/jquery.waypoints.min.js')}}"></script>
+        <script src="{{asset('js/jquery.stellar.min.js')}}"></script>
+        <script src="{{asset('js/jquery.animateNumber.min.js')}}"></script>
+        <script src="{{asset('js/bootstrap-datepicker.js')}}"></script>
+        <script src="{{asset('js/jquery.timepicker.min.js')}}"></script>
+        <script src="{{asset('js/owl.carousel.min.js')}}"></script>
+        <script src="{{asset('js/jquery.magnific-popup.min.js')}}"></script>
+        <script src="{{asset('js/scrollax.min.js')}}"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+        <script src="{{asset('js/google-map.js')}}"></script>
+        <script src="{{asset('js/main.js')}}"></script>
+    {% endblock %}
+
+</head>
+
+
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+        <a class="navbar-brand" href="home">Mov<span>Eat<i class="fa fa-leaf"></i></span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="fa fa-bars"></span> Menu
+        </button>
+        <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active"><a href="/home" class="nav-link">Home</a></li>
+                <li class="nav-item "><a href="about.html" class="nav-link">S'inscrire</a></li>
+                <li class="nav-item "><a href="program" class="nav-link">Programmes</a></li>
+                <li class="nav-item "><a href="astuces" class="nav-link">Astuces</a></li>
+                <li class="nav-item "><a href="rendezvous" class="nav-link">Téléconsultation</a></li>
+                <li class="nav-item "><a href="stories" class="nav-link">Stories</a></li>
+                <li class="nav-item "><a href="coachlist" class="nav-link">Coach</a></li>
+                <li class="nav-item "><a href="about.html" class="nav-link">About</a></li>
+                <li class="nav-item "><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    {% block body %}
+
+    {% endblock %}
+</div>
+</body>
+
+</html>
