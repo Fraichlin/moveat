@@ -1,0 +1,13 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Edit Nutrition{% endblock %}
+
+{% block body %}
+    <h1>Edit Nutrition</h1>
+
+    {{ include('nutrition/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('nutrition_index') }}">back to list</a>
+
+    {{ include('nutrition/_delete_form.html.twig') }}
+{% endblock %}

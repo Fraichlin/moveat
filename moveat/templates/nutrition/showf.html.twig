@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+{% block title %}Liste des nutritions{% endblock %}
+
+{% block body %}
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for n in nutrition %}
+    <div class="col">
+        <div class="card h-100">
+
+
+            <img
+                    src="{{ asset('images/' ~ n.image) }}"
+                    class="card-img-top"
+                    alt="..."
+
+            />
+            <div class="card-body">
+                <h5 class="card-title">{{ n.name }}</h5>
+                <p class="card-text">
+                    {{ n.lastName }}<br>
+                    {{ n.adresse }}<br>
+                    {{ n.telephone }}<br>
+                    {{ n.email }}<br>
+
+                </p>
+                <div class="card-footer">
+                    <a href="{#{path('show_id',  {'id': p.id})}#}" class="btn btn-primary">consulter</a>
+                </div>
+            </div>
+
+        </div>
+
+        {% endfor %}
+    </div>
+    <div class="navigation">
+        {{ knp_pagination_render(nutrition) }}
+    </div>
+
+
+{% endblock %}

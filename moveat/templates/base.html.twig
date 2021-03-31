@@ -1,19 +1,146 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
-        {% endblock %}
+<html lang="en">
+<head>
+    <title>{% block title %}MovEat{% endblock %}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% block css%}
+        <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+        <link rel="stylesheet" href="{{asset('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')}}">
+
+        <link rel="stylesheet" href="{{asset('css/animate.css')}}">
+
+        <link rel="stylesheet" href="{{asset('css/owl.carousel.min.css')}}">
+        <link rel="stylesheet" href="{{asset('css/owl.theme.default.min.css')}}">
+        <link rel="stylesheet" href="{{asset('css/magnific-popup.css')}}">
+
+        <link rel="stylesheet" href="{{asset('css/bootstrap-datepicker.css')}}">
+        <link rel="stylesheet" href="{{asset('css/jquery.timepicker.css')}}">
+
+        <link rel="stylesheet" href="{{asset('css/flaticon.css')}}">
+        <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    {% endblock %}
+    {% block js %}
+        <script src="{{asset('js/jquery.min.js')}}"></script>
+        <script src="{{asset('js/jquery-migrate-3.0.1.min.js')}}"></script>
+        <script src="{{asset('js/popper.min.js')}}"></script>
+        <script src="{{asset('js/bootstrap.min.js')}}"></script>
+        <script src="{{asset('js/jquery.easing.1.3.js')}}"></script>
+        <script src="{{asset('js/jquery.waypoints.min.js')}}"></script>
+        <script src="{{asset('js/jquery.stellar.min.js')}}"></script>
+        <script src="{{asset('js/jquery.animateNumber.min.js')}}"></script>
+        <script src="{{asset('js/bootstrap-datepicker.js')}}"></script>
+        <script src="{{asset('js/jquery.timepicker.min.js')}}"></script>
+        <script src="{{asset('js/owl.carousel.min.js')}}"></script>
+        <script src="{{asset('js/jquery.magnific-popup.min.js')}}"></script>
+        <script src="{{asset('js/scrollax.min.js')}}"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+        <script src="{{asset('js/google-map.js')}}"></script>
+        <script src="{{asset('js/main.js')}}"></script>
+    {% endblock %}
+
+</head>
+
+
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+    <div class="container">
+        <a class="navbar-brand" href="home">Mov<span>Eat<i class="fa fa-leaf"></i></span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="fa fa-bars"></span> Menu
+        </button>
+        <div class="collapse navbar-collapse" id="ftco-nav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active"><a href="/home" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">S'inscrire</a></li>
+                <li class="nav-item"><a href="program" class="nav-link">Programmes</a></li>
+                <li class="nav-item"><a href="astuces" class="nav-link">Astuces</a></li>
+                <li class="nav-item"><a href="rendezvous" class="nav-link">Téléconsultation</a></li>
+                <li class="nav-item"><a href="stories" class="nav-link">Stories</a></li>
+                <li class="nav-item"><a href="coachlist" class="nav-link">Coach</a></li>
+                <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    {% block body %}
+    {% endblock %}
+</div>
+</body>
+<footer class="footer">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-4 col-lg-5">
+                <div class="row">
+                    <div class="col-md-12 col-lg-8 mb-md-0 mb-4">
+                        <h2 class="footer-heading"><a href="#" class="logo">Mov<span>Eat</span></a></h2>
+                        <a href="#">read more <span class="ion-ios-arrow-round-forward"></span></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 col-lg-7">
+                <div class="row">
+                    <div class="col-md-3 mb-md-0 mb-4 border-left">
+                        <h2 class="footer-heading">Services</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="py-1 d-block">Balance Body</a></li>
+                            <li><a href="#" class="py-1 d-block">Physical Activity</a></li>
+                            <li><a href="#" class="py-1 d-block">Fitness Program</a></li>
+                            <li><a href="#" class="py-1 d-block">Healthy Food</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 mb-md-0 mb-4 border-left">
+                        <h2 class="footer-heading">About</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="py-1 d-block">Staff</a></li>
+                            <li><a href="#" class="py-1 d-block">Team</a></li>
+                            <li><a href="#" class="py-1 d-block">Careers</a></li>
+                            <li><a href="#" class="py-1 d-block">Blog</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 mb-md-0 mb-4 border-left">
+                        <h2 class="footer-heading">Resources</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="py-1 d-block">Security</a></li>
+                            <li><a href="#" class="py-1 d-block">Global</a></li>
+                            <li><a href="#" class="py-1 d-block">Charts</a></li>
+                            <li><a href="#" class="py-1 d-block">Privacy</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 mb-md-0 mb-4 border-left">
+                        <h2 class="footer-heading">Social</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="py-1 d-block">Facebook</a></li>
+                            <li><a href="#" class="py-1 d-block">Twitter</a></li>
+                            <li><a href="#" class="py-1 d-block">Instagram</a></li>
+                            <li><a href="#" class="py-1 d-block">Google</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col-md-6 col-lg-8">
+
+                <p class="copyright"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    Copyright &copy;<script>document.write(new Date().getFullYear());</script>
+
+            </div>
+            <div class="col-md-6 col-lg-4 text-md-right">
+                <p class="mb-0 list-unstyled">
+                    <a class="mr-md-3" href="#">Terms</a>
+                    <a class="mr-md-3" href="#">Privacy</a>
+                    <a class="mr-md-3" href="#">Compliances</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
 </html>

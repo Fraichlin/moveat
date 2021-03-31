@@ -38,8 +38,14 @@ class PatientController extends AbstractController
              $em=$this->getDoctrine()->getManager();
              $em->persist($patient);
              $em->flush();
-             if($this->get('$bmi')<18){
-                 return $this->redirect("prendre_poids");
+             if ($form->isSubmitted() && $form->isValid()) {
+                 $patient = $form->getData();
+
+                 return $this->redirectToRoute('results', [
+                     'poid' => $patient->getPoid(),
+                     'taille' => $patient->getTaille(),
+                     'gender' => $patient->getGender()
+                 ]);
              }
          }
         return $this->render('patient/add.html.twig', [

@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\PatientRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,8 +36,15 @@ class Patient
     private $age;
 
     /**
+     * @Assert\Choice({"Male", "Female", "Other"})
+     */
+    private $gender;
+
+
+    /**
      * @ORM\Column(type="float")
      */
+
     private $taille;
 
     /**
@@ -44,14 +52,27 @@ class Patient
      */
     private $poid;
 
+
+
     /**
-     * @ORM\OneToMany(targetEntity=ProgramNutri::class, mappedBy="Patient")
+     * @ORM\ManyToOne(targetEntity=Programme::class, inversedBy="Patient")
      */
-    private $programNutris;
+    private $programme;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="patient")
+     */
+    private $comments;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Nutrition::class, inversedBy="Patient")
+     */
+    private $nutrition;
 
     public function __construct()
     {
-        $this->programNutris = new ArrayCollection();
+       // $this->programme = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -94,6 +115,15 @@ class Patient
 
         return $this;
     }
+    public function getGender()
+    {
+        return $this->gender;
+    }
+
+    public function setGender($gender)
+    {
+        $this->gender = $gender;
+    }
 
     public function getTaille(): ?float
     {
@@ -119,40 +149,60 @@ class Patient
         return $this;
     }
 
-    /**
-     * @return Collection|ProgramNutri[]
-     */
-    public function getProgramNutris(): Collection
+
+
+    public function getProgramme(): ?Programme
     {
-        return $this->programNutris;
+        return $this->programme;
     }
 
-    public function addProgramNutri(ProgramNutri $programNutri): self
+    public function setProgramme(?Programme $programme): self
     {
-        if (!$this->programNutris->contains($programNutri)) {
-            $this->programNutris[] = $programNutri;
-            $programNutri->setPatient($this);
+        $this->programme = $programme;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setPatient($this);
         }
 
         return $this;
     }
 
-    public function removeProgramNutri(ProgramNutri $programNutri): self
+    public function removeComment(Comment $comment): self
     {
-        if ($this->programNutris->removeElement($programNutri)) {
+        if ($this->comments->removeElement($comment)) {
             // set the owning side to null (unless already changed)
-            if ($programNutri->getPatient() === $this) {
-                $programNutri->setPatient(null);
+            if ($comment->getPatient() === $this) {
+                $comment->setPatient(null);
             }
         }
 
         return $this;
     }
-    public function bmi()
+
+    public function getNutrition(): ?Nutrition
     {
-        $bmip = $this->get('request')->request->get('$poid');
-        $bmit = $this->get('request')->request->get('$taille');
-        $bmi = $bmip/$bmit^2;
-        return $bmi;
+        return $this->nutrition;
     }
+
+    public function setNutrition(?Nutrition $nutrition): self
+    {
+        $this->nutrition = $nutrition;
+
+        return $this;
+    }
+
 }

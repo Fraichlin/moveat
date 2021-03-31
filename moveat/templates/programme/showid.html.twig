@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Programme{% endblock %}
+
+{% block body %}
+    <h1>Programme</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Name</th>
+            <td>{{ programme.name }}</td>
+        </tr>
+        <tr>
+            <th>Type</th>
+            <td>{{ programme.type }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ programme.description }}</td>
+        </tr>
+        <tr>
+            <th>Break_fast</th>
+            <td>{{ programme.breackfast }}</td>
+        </tr>
+        <tr>
+            <th>Dinner</th>
+            <td>{{ programme.dinner }}</td>
+        </tr>
+        <tr>
+            <th>Lunch</th>
+            <td>{{ programme.lunch }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <p>to make a specialized program for you you can consult a nutritionist</p>
+    <a href="{{ path("showf") }}" class="btn btn-primary">consult</a>
+
+
+{% endblock %}

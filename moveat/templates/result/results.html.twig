@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+ {% block body %}
+     <h1> Welcome to our Application MovEat</h1>
+
+<h3>You are {{ gender }}</h3>
+<br>
+
+<h3>Your height is {{ taille }}</h3>
+<h3>Your weight is {{ poid }}</h3>
+<br>
+<h3>Your bmi is {{ bmi }}</h3>
+
+<h3>{{ messageAboutBmi }}</h3>
+
+<br>
+<br>
+{% if (messageAboutBmi == "Your weight is too low" and type == "A") %}
+<!--input type="button" value="go" onclick="location={#  #}{ url ('prendre_poids') }}"!-->
+    <p>we gonna give this program to take you to the perfect weight</p>
+    <a href="{{ path('showA') }}">GO</a>
+
+     {% elseif (messageAboutBmi == "Your weight is too high" and type == "B") %}
+         <p>we gonna give this program to take you to the perfect weight</p>
+         <!--input type="button" value="go" onclick="location={#  #}{ url ('prendre_poids') }}"!-->
+         <a href="{{ path('showB') }}">GO</a>
+     {% else%}
+         <p>we gonna give this program to keep you in the perfect weight</p>
+         <!--input type="button" value="go" onclick="location={#  #}{ url ('prendre_poids') }}"!-->
+         <a href="{{ path('show') }}">GO</a>
+     {% endif %}
+ {% endblock %}
