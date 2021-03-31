@@ -123,7 +123,7 @@ class CoachType extends AbstractType
                         'allow_delete' => true,
                         'delete_label' => 'supprimer',
                         'download_label' => 'télécharger',
-                        'download_uri' => true,
+                        'download_uri' => false,
                         'image_uri' => true,
                         'asset_helper' => true,
                         'constraints'=>[
@@ -139,7 +139,7 @@ class CoachType extends AbstractType
                         'required' => false,
                         'allow_delete' => true,
                         'delete_label' => 'supprimer',
-                        'download_uri' => true,
+                        'download_uri' => false,
                         'download_label' => 'télécharger',
                         'asset_helper' => true,
                         'constraints'=>[
@@ -165,7 +165,7 @@ class CoachType extends AbstractType
                         'allow_delete' => true,
                         'delete_label' => 'supprimer',
                         'download_label' => 'télécharger',
-                        'download_uri' => true,
+                        'download_uri' => false,
                         'image_uri' => true,
                         'asset_helper' => true,
                         'constraints'=>[

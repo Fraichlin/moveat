@@ -108,7 +108,7 @@ class MemberType extends AbstractType
             'allow_delete' => true,
             'delete_label' => 'supprimer',
             'download_label' => 'télécharger',
-            'download_uri' => true,
+            'download_uri' => false,
             'image_uri' => true,
             'asset_helper' => true,
             'constraints'=>[
