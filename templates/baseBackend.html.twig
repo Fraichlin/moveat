@@ -116,8 +116,11 @@
 {#    </footer>#}
     <!--footer end-->
 {% block js %}
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     {{ encore_entry_script_tags('app') }}
-    <script src="{{ asset('lib/chart-master/Chart.js') }}"></script>
+    {% block chart %}
+    {% endblock %}
+{#    <script src="{{ asset('lib/chart-master/Chart.js') }}"></script>#}
     <script src="{{ asset('lib/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('lib/bootstrap/js/bootstrap.min.js') }}"></script>
     <script class="include" type="text/javascript" src="{{ asset('lib/jquery.dcjqaccordion.2.7.js') }}"></script>

@@ -14,4 +14,16 @@ import './bootstrap';
 $('.custom-file-input').on('change', function (e){
     var inputFile = e.currentTarget;
     $(inputFile).parent().find('.custom-file-label').html(inputFile.files[0].name);
-})
+});
+$('#searchListCoach').on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $('#tableListCoach tr').filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+});
+$('#searchListMember').on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $('#tableListMember tr').filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+});

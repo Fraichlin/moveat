@@ -79,14 +79,157 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ->getOneOrNullResult();
     }
 
-    public function findCoachByStatus()
+    public function findValidedCoachByStatus()
     {
         return $this->createQueryBuilder('u')
-            ->andWhere('u.roles = :val AND (u.statut = :val1 OR u.statut = :val2 OR u.statut = :val3)')
+            ->Where('u.roles = :val AND (u.statut = :val1 OR u.statut = :val2 OR u.statut = :val3)')
             ->setParameter('val', ['["ROLE_COACH"]'])
             ->setParameter('val1', 'actived')
             ->setParameter('val2', 'blocked')
             ->setParameter('val3', 'unblocked')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findValidedCoachByMonth($year,$month)
+    {
+        $fromTime = new \DateTime($year . '-' . $month . '-01');
+        $toTime = new \DateTime($fromTime->format('Y-m-d') . ' first day of next month');
+        return $this->createQueryBuilder('u')
+            ->Where('u.roles = :val AND (u.statut = :val1 OR u.statut = :val2 OR u.statut = :val3)')
+            ->andWhere('u.dateInscription >= :fromTime')
+            ->andWhere('u.dateInscription < :toTime')
+            ->setParameter('val', ['["ROLE_COACH"]'])
+            ->setParameter('val1', 'actived')
+            ->setParameter('val2', 'blocked')
+            ->setParameter('val3', 'unblocked')
+            ->setParameter('fromTime', $fromTime)
+            ->setParameter('toTime', $toTime)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findMember()
+    {
+        return $this->createQueryBuilder('u')
+            ->Where('u.roles = :val')
+            ->setParameter('val', ['["ROLE_MEMBER"]'])
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+    public function findMemberByMonth($year,$month)
+    {
+        $fromTime = new \DateTime($year . '-' . $month . '-01');
+        $toTime = new \DateTime($fromTime->format('Y-m-d') . ' first day of next month');
+        return $this->createQueryBuilder('u')
+            ->Where('u.roles = :val')
+            ->andWhere('u.dateInscription >= :fromTime')
+            ->andWhere('u.dateInscription < :toTime')
+            ->setParameter('val', ['["ROLE_MEMBER"]'])
+            ->setParameter('fromTime', $fromTime)
+            ->setParameter('toTime', $toTime)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findValidedNutritionistByMonth($year,$month)
+    {
+        $fromTime = new \DateTime($year . '-' . $month . '-01');
+        $toTime = new \DateTime($fromTime->format('Y-m-d') . ' first day of next month');
+        return $this->createQueryBuilder('u')
+            ->Where('u.roles = :val AND (u.statut = :val1 OR u.statut = :val2 OR u.statut = :val3)')
+            ->andWhere('u.dateInscription >= :fromTime')
+            ->andWhere('u.dateInscription < :toTime')
+            ->andWhere('u.specialite = :val4')
+            ->setParameter('val', ['["ROLE_COACH"]'])
+            ->setParameter('val1', 'actived')
+            ->setParameter('val2', 'blocked')
+            ->setParameter('val3', 'unblocked')
+            ->setParameter('val4', 'Nutritioniste')
+            ->setParameter('fromTime', $fromTime)
+            ->setParameter('toTime', $toTime)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findValidedCSportByMonth($year,$month)
+    {
+        $fromTime = new \DateTime($year . '-' . $month . '-01');
+        $toTime = new \DateTime($fromTime->format('Y-m-d') . ' first day of next month');
+        return $this->createQueryBuilder('u')
+            ->Where('u.roles = :val AND (u.statut = :val1 OR u.statut = :val2 OR u.statut = :val3)')
+            ->andWhere('u.dateInscription >= :fromTime')
+            ->andWhere('u.dateInscription < :toTime')
+            ->andWhere('u.specialite = :val4')
+            ->setParameter('val', ['["ROLE_COACH"]'])
+            ->setParameter('val1', 'actived')
+            ->setParameter('val2', 'blocked')
+            ->setParameter('val3', 'unblocked')
+            ->setParameter('val4', 'Coach Sportif')
+            ->setParameter('fromTime', $fromTime)
+            ->setParameter('toTime', $toTime)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findValidedPsyByMonth($year,$month)
+    {
+        $fromTime = new \DateTime($year . '-' . $month . '-01');
+        $toTime = new \DateTime($fromTime->format('Y-m-d') . ' first day of next month');
+        return $this->createQueryBuilder('u')
+            ->Where('u.roles = :val AND (u.statut = :val1 OR u.statut = :val2 OR u.statut = :val3)')
+            ->andWhere('u.dateInscription >= :fromTime')
+            ->andWhere('u.dateInscription < :toTime')
+            ->andWhere('u.specialite = :val4')
+            ->setParameter('val', ['["ROLE_COACH"]'])
+            ->setParameter('val1', 'actived')
+            ->setParameter('val2', 'blocked')
+            ->setParameter('val3', 'unblocked')
+            ->setParameter('val4', 'Psychothérapeute')
+            ->setParameter('fromTime', $fromTime)
+            ->setParameter('toTime', $toTime)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findValidedNutritionist()
+    {
+        return $this->createQueryBuilder('u')
+            ->Where('u.roles = :val')
+            ->andWhere('u.specialite = :val1')
+            ->setParameter('val', ['["ROLE_COACH"]'])
+            ->setParameter('val1', 'Nutritioniste')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findValidedCoachsportif()
+    {
+        return $this->createQueryBuilder('u')
+            ->Where('u.roles = :val')
+            ->andWhere('u.specialite = :val1')
+            ->setParameter('val', ['["ROLE_COACH"]'])
+            ->setParameter('val1', 'Coach Sportif')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findValidedPsy()
+    {
+        return $this->createQueryBuilder('u')
+            ->Where('u.roles = :val')
+            ->andWhere('u.specialite = :val1')
+            ->setParameter('val', ['["ROLE_COACH"]'])
+            ->setParameter('val1', 'Psychothérapeute')
             ->getQuery()
             ->getResult()
             ;

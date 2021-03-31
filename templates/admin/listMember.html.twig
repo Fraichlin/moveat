@@ -14,6 +14,8 @@
         <!-- row -->
         <div class="row mt">
             <div class="col-md-12">
+                <input style="float: right;" id="searchListMember" type="text" class="form-control col-md-3"  placeholder="Recherche générale...">
+                <br><br>
                 <div class="content-panel">
                     <table class="table table-striped table-advance table-hover">
                         <thead>
@@ -25,7 +27,7 @@
                             <th>Actions</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tableListMember">
                         {% for m in member %}
                             <tr>
                                 <td>{{ m.nom }}</td>

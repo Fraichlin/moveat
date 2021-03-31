@@ -822,8 +822,8 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 .custom-bar-chart .bar {
     height: 100%;
     position: relative;
-    width: 6%;
-    margin: 0px 4%;
+    width: 2%;
+    margin: 0px 3%;
     float: left;
     text-align: center;
     z-index: 10;
