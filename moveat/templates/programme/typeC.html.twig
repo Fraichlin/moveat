@@ -18,10 +18,14 @@
                         </p>
                     </div>
                     <div class="card-footer">
-                        <a href="{{ path('show_id',  {'id': p.id}) }}" class="btn btn-primary">read more/a>
+                        <a href="{{ path('show_id',  {'id': p.id}) }}" class="btn btn-primary">read more</a>
+                        <a href="{{ path("listp",{'id': p.id }) }}" class="btn btn-primary">download</a>
                     </div>
+
                 </div>
-            </div>
+                </div>
+
+
         {% endfor %}
     </div>
     <div class="navigation">

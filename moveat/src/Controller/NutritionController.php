@@ -52,27 +52,7 @@ class NutritionController extends AbstractController
     /**
      * @Route("/shf", name="showf", methods={"GET"})
      */
-    public function index2(NutritionRepository $nutritionRepository): Response
-    {
-        return $this->render('nutrition/showf.html.twig', [
-            'nutrition' => $nutritionRepository->findAll(),
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="nutrition_show", methods={"GET"})
-     */
-    public function show(Nutrition $nutrition): Response
-    {
-        return $this->render('nutrition/show.html.twig', [
-            'nutrition' => $nutrition,
-        ]);
-    }
-    /**
-     *
-     * @Route("/nush", name="shownf", methods={"GET"})
-     */
-    public function showf(NutritionRepository $nutritionRepository,Request $request, PaginatorInterface $paginator): Response
+    public function index2(NutritionRepository $nutritionRepository,Request $request, PaginatorInterface $paginator): Response
     {
         $nutrition = $nutritionRepository;
         $repository = $this->getDoctrine()->getRepository(Nutrition::class);
@@ -88,8 +68,18 @@ class NutritionController extends AbstractController
         return $this->render('nutrition/showf.html.twig', [
             'nutrition' => $nutrition,
         ]);
-
     }
+
+    /**
+     * @Route("/{id}", name="nutrition_show", methods={"GET"})
+     */
+    public function show(Nutrition $nutrition): Response
+    {
+        return $this->render('nutrition/show.html.twig', [
+            'nutrition' => $nutrition,
+        ]);
+    }
+
 
     /**
      * @Route("/{id}/edit", name="nutrition_edit", methods={"GET","POST"})
