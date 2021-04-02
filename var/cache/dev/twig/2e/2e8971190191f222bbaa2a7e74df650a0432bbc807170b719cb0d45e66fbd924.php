@@ -50,7 +50,7 @@ class __TwigTemplate_c974a97d9fa465072d59f4bb7a66c0fa698b3bd60a3b79355267bfee9c7
     <meta name=\"description\" content=\"\">
     <meta name=\"author\" content=\"Dashboard\">
     <meta name=\"keyword\" content=\"Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina\">
-    <title>Dashio - Bootstrap Admin Template</title>
+    <title>back</title>
 
     <!-- Favicons -->
     <link href=\"img/favicon.png\" rel=\"icon\">
@@ -67,18 +67,13 @@ class __TwigTemplate_c974a97d9fa465072d59f4bb7a66c0fa698b3bd60a3b79355267bfee9c7
     <link href=\"cssback/style-responsive.css\" rel=\"stylesheet\">
     <script src=\"lib/chart-master/Chart.js\"></script>
 
-    <!-- =======================================================
-      Template Name: Dashio
-      Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
-      Author: TemplateMag.com
-      License: https://templatemag.com/license/
-    ======================================================= -->
+
 </head>
 
 ";
-        // line 35
+        // line 30
         $this->displayBlock('body', $context, $blocks);
-        // line 38
+        // line 33
         echo "</html>
 ";
         
@@ -89,7 +84,7 @@ class __TwigTemplate_c974a97d9fa465072d59f4bb7a66c0fa698b3bd60a3b79355267bfee9c7
 
     }
 
-    // line 35
+    // line 30
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -99,7 +94,7 @@ class __TwigTemplate_c974a97d9fa465072d59f4bb7a66c0fa698b3bd60a3b79355267bfee9c7
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 36
+        // line 31
         echo "
 ";
         
@@ -117,7 +112,7 @@ class __TwigTemplate_c974a97d9fa465072d59f4bb7a66c0fa698b3bd60a3b79355267bfee9c7
 
     public function getDebugInfo()
     {
-        return array (  103 => 36,  93 => 35,  82 => 38,  80 => 35,  44 => 1,);
+        return array (  98 => 31,  88 => 30,  77 => 33,  75 => 30,  44 => 1,);
     }
 
     public function getSourceContext()
@@ -131,7 +126,7 @@ class __TwigTemplate_c974a97d9fa465072d59f4bb7a66c0fa698b3bd60a3b79355267bfee9c7
     <meta name=\"description\" content=\"\">
     <meta name=\"author\" content=\"Dashboard\">
     <meta name=\"keyword\" content=\"Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina\">
-    <title>Dashio - Bootstrap Admin Template</title>
+    <title>back</title>
 
     <!-- Favicons -->
     <link href=\"img/favicon.png\" rel=\"icon\">
@@ -148,18 +143,13 @@ class __TwigTemplate_c974a97d9fa465072d59f4bb7a66c0fa698b3bd60a3b79355267bfee9c7
     <link href=\"cssback/style-responsive.css\" rel=\"stylesheet\">
     <script src=\"lib/chart-master/Chart.js\"></script>
 
-    <!-- =======================================================
-      Template Name: Dashio
-      Template URL: https://templatemag.com/dashio-bootstrap-admin-template/
-      Author: TemplateMag.com
-      License: https://templatemag.com/license/
-    ======================================================= -->
+
 </head>
 
 {% block body %}
 
 {% endblock %}
 </html>
-", "baseback.html.twig", "C:\\Users\\Yassine Harbaoui\\Documents\\GitHub\\moveat\\templates\\baseback.html.twig");
+", "baseback.html.twig", "C:\\Users\\Yassine Harbaoui\\Documents\\GitHub\\pushing\\moveat\\templates\\baseback.html.twig");
     }
 }

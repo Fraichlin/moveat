@@ -234,8 +234,16 @@ class __TwigTemplate_1e4dfd3bf756b37bfcc8c889e29c2cc9c9dfcddc89d93349b2eba8a15d1
                     </div>
 
                     <div class=\"sidebar-box ftco-animate\">
-                        <h3>Paragraph</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
+                        <div class=\"col-md-12\" >
+
+
+                                <iframe class=\"ratio ratio-16x9\"
+
+                                        src=\"https://www.youtube.com/embed/vlDzYIIOYmM\"
+                                        title=\"YouTube video\"
+                                        allowfullscreen></iframe>
+                            
+                        </div>
                     </div>
                 </div>
 
@@ -472,8 +480,16 @@ class __TwigTemplate_1e4dfd3bf756b37bfcc8c889e29c2cc9c9dfcddc89d93349b2eba8a15d1
                     </div>
 
                     <div class=\"sidebar-box ftco-animate\">
-                        <h3>Paragraph</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus itaque, autem necessitatibus voluptate quod mollitia delectus aut, sunt placeat nam vero culpa sapiente consectetur similique, inventore eos fugit cupiditate numquam!</p>
+                        <div class=\"col-md-12\" >
+
+
+                                <iframe class=\"ratio ratio-16x9\"
+
+                                        src=\"https://www.youtube.com/embed/vlDzYIIOYmM\"
+                                        title=\"YouTube video\"
+                                        allowfullscreen></iframe>
+                            
+                        </div>
                     </div>
                 </div>
 
