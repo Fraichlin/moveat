@@ -17,10 +17,6 @@ class Comment
      */
     private $id;
 
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $authorName;
 
     /**
      * @ORM\Column(type="text")
@@ -47,17 +43,6 @@ class Comment
         return $this->id;
     }
 
-    public function getAuthorName(): ?string
-    {
-        return $this->authorName;
-    }
-
-    public function setAuthorName(string $authorName): self
-    {
-        $this->authorName = $authorName;
-
-        return $this;
-    }
 
     public function getContent(): ?string
     {

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Comment;
 use App\Entity\Patient;
 use App\Entity\Programme;
+use App\Form\CommentType;
 use App\Form\PatientType;
 use App\Form\ProgrammeType;
 use App\Repository\CommentRepository;
@@ -138,17 +139,38 @@ class ProgrammeController extends AbstractController
     }
 
     /**
-     * @Route("/idsh/{id}", name="show_id", methods={"GET"})
+     * @param Programme $programme
+     * @param Request $request
+     * @param CommentRepository $commentRepository
+     * @param PatientRepository $repository
+     * @param $id
+     * @return Response
+     * @Route("/idsh/{id}", name="show_id", methods={"GET","POST"})
      */
-    public function showid(ProgrammeRepository $programmeRepository, $id): Response
+    public function showid(Programme $programme,Request $request,CommentRepository $commentRepository,PatientRepository $repository, $id): Response
     {
-        $programme = $programmeRepository;
-        $repository = $this->getDoctrine()->getRepository(Programme::class);
-        $programme = $repository->find($id);
+        $comment = new Comment();
+        $form1 = $this->createForm(CommentType::class,$comment);
+        $form1->handleRequest($request);
+        if ($form1->isSubmitted() && $form1->isValid()) {
+            $comment->setCreatedAt(new \DateTime())
+                ->setProgramme($programme);
+            $value=$repository->find($id);
+            $comment->setPatient($value);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($comment);
+            $entityManager->flush();
+            return $this->redirectToRoute('show_id',['id'=>$id]);
+        }
+        $offrepost = $commentRepository->findBy(['programme'=>$programme]);
+
         return $this->render('programme/showid.html.twig', [
-            'programme' =>$programme,
+            'programme' => $programme,
+            'comments'=> $offrepost,
+            'commentForm'=>$form1->createView(),
         ]);
     }
+
     /**
      * @Route("/listp/{id}", name="listp", methods={"GET"})
      */
@@ -181,9 +203,22 @@ class ProgrammeController extends AbstractController
         $dompdf->render();
 
         // Output the generated PDF to Browser (force download)
-        $dompdf->stream("mypdf.pdf", [
-            "Attachment" => true
-        ]);
+        //$dompdf->stream("mypdf.pdf", [
+           // "Attachment" => true
+        //]);
+        // Store PDF Binary Data
+        $output = $dompdf->output();
+
+        // In this case, we want to write the file in the public directory
+        $publicDirectory = $this->get('kernel')->getProjectDir() . '/public';
+        // e.g /var/www/project/public/mypdf.pdf
+        $pdfFilepath =  $publicDirectory . '/mypdf.pdf';
+
+        // Write file to the desired path
+        file_put_contents($pdfFilepath, $output);
+
+        // Send some text response
+        return new Response("The PDF file has been succesfully generated !");
 
     }
 
@@ -221,47 +256,6 @@ class ProgrammeController extends AbstractController
         return $this->redirectToRoute('programme_index');
     }
 
-/**
- * @Route("/make/{id}", name="make", methods={"GET","POST"})
- */
-public function make(ProgrammeRepository $programmeRepository,$id,Request $request,PatientRepository $repository,CommentRepository $commentRepository): Response
-{
-    $entityManager = $this->getDoctrine()->getManager();
-    $programme = $entityManager->getRepository(Programme::class)->find($id);
-    $comment = new Comment();
-    $session = $request->getSession();
-    $form1 = $this->createForm(CommentType::class, $comment);
-    $form1->handleRequest($request);
-    if ($form1->isSubmitted() && $form1->isValid()) {
-        $comment->setCreatedAt(new \DateTime())
-            ->setProgramme($programme)
-            ->setAuthorName($this->get('session')->get('name'));
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($comment);
-        $entityManager->flush();
-        return $this->redirectToRoute('make', ['id' => $id]);
-    }
-    $patient = new Patient();
-    $form = $this->createForm(PatientType::class, $patient);
-    $form->handleRequest($request);
-    if ($form->isSubmitted() && $form->isValid()) {
-        $patientCheck = $repository->findOneBy(['nom' => $patient->getNom()]);
 
-        $session = new Session();
-        $session->set('id', $patientCheck->getId());
-        $session->set('nom', $patientCheck->getNom());
-
-
-    }
-
-    $programmetype = $programmeRepository->findBy(['id' => $id]);
-    $programmepost = $commentRepository->findBy(['programme' => $programme]);
-    return $this->render('programme/make.html.twig', [
-        'comments' => $programmepost,
-        'programme' => $programmetype,
-        'form' => $form->createView(),
-        'commentForm' => $form1->createView(),
-    ]);
-}
 }
 

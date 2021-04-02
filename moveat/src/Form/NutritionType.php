@@ -26,7 +26,7 @@ class NutritionType extends AbstractType
                 'download_label' => '...',
                 'download_uri' => true,
                 'image_uri' => true,
-                'imagine_pattern' => '...',
+                //'imagine_pattern' => '...',
                 'asset_helper' => true,]
             )
 

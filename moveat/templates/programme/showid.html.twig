@@ -35,6 +35,40 @@
     </table>
     <p>to make a specialized program for you you can consult a nutritionist</p>
     <a href="{{ path("showf") }}" class="btn btn-primary">consult</a>
+{% for comment in comments %}
+    <div class="row">
+        <div class="col-sm-5">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <strong>{{ comment.patient.nom }}</strong> <span class="text-muted">commented At {{ comment.createdAt | date('d/m/y') }}</span>
+                </div>
+                <div class="panel-body">
+                    {{ comment.content }}
+                </div><!-- /panel-body -->
+            </div><!-- /panel panel-default -->
+        </div><!-- /col-sm-5 -->
+    </div><!-- /row -->
+
+{% endfor %}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-7" id="new_status">
+            <form action="{{ path('show_id',{'id': programme.id}) }}" method="post" >
+                <div class="col-xs-12" id="post_content">
+                    <div class="textarea_wrap">
+                        {{ form_start(commentForm) }}
+                        {{ form_widget(commentForm.content,{'attr':{'placeholder':'Leave Comment','class':'form-control','rows':'5'}}) }}
+                        {{ form_widget(commentForm) }}
+                        <div class="col-xs-5">
+                            <button class="btn btn-primary btn-block">{{ button_label|default('Post') }}</button>
+                        </div>
+                        {{ form_end(commentForm) }}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 
 {% endblock %}

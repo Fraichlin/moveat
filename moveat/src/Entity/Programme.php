@@ -61,8 +61,7 @@ class Programme
     private $dinner;
 
     /**
-     * @ORM\OneToMany(targetEntity=Patient::class, mappedBy="programme")
-     *
+     * @ORM\ManyToOne(targetEntity=Patient::class, inversedBy="programme")
      */
     private $Patient;
 
@@ -183,32 +182,14 @@ class Programme
         return $this;
     }
 
-    /**
-     * @return Collection|Patient[]
-     */
-    public function getPatient(): Collection
+    public function getPatient(): ?Patient
     {
-        return $this->Patient;
+        return $this->patient;
     }
 
-    public function addPatient(Patient $patient): self
+    public function setPatient(?Patient $patient): self
     {
-        if (!$this->Patient->contains($patient)) {
-            $this->Patient[] = $patient;
-            $patient->setProgramme($this);
-        }
-
-        return $this;
-    }
-
-    public function removePatient(Patient $patient): self
-    {
-        if ($this->Patient->removeElement($patient)) {
-            // set the owning side to null (unless already changed)
-            if ($patient->getProgramme() === $this) {
-                $patient->setProgramme(null);
-            }
-        }
+        $this->patient = $patient;
 
         return $this;
     }

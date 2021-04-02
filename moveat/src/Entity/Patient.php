@@ -55,7 +55,7 @@ class Patient
 
 
     /**
-     * @ORM\ManyToOne(targetEntity=Programme::class, inversedBy="Patient")
+     * @ORM\OneToMany(targetEntity=Programme::class, mappedBy="Patient")
      */
     private $programme;
 
@@ -71,7 +71,7 @@ class Patient
 
     public function __construct()
     {
-       // $this->programme = new ArrayCollection();
+        $this->programme = new ArrayCollection();
         $this->comments = new ArrayCollection();
     }
 
@@ -151,14 +151,32 @@ class Patient
 
 
 
-    public function getProgramme(): ?Programme
+    /**
+     * @return Collection|Programme[]
+     */
+    public function getProgramme(): Collection
     {
         return $this->programme;
     }
 
-    public function setProgramme(?Programme $programme): self
+    public function addProgramme(Programme $programme): self
     {
-        $this->programme = $programme;
+        if (!$this->programme->contains($programme)) {
+            $this->programme[] = $programme;
+            $programme->setPatient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProgramme(Programme $programme): self
+    {
+        if ($this->programme->removeElement($programme)) {
+            // set the owning side to null (unless already changed)
+            if ($programme->getPatient() === $this) {
+                $programme->setPatient(null);
+            }
+        }
 
         return $this;
     }
