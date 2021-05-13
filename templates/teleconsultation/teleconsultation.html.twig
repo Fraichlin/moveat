@@ -1,0 +1,18 @@
+{% extends 'baseFrontend.html.twig' %}
+
+{% block title %}Demande de teleconsulation{% endblock %}
+{% block activation2 %}active{% endblock %}
+{% block body %}
+<h1 class="h3 mb-3 font-weight-normal">Demande de RDV pour une téléconsultation</h1>
+<div class="row" style="background-color: #f3d6a0;opacity: 0.9;">
+    <div class="col-lg-8 mx-auto">
+    {{ form_start(form) }}
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+    {{ form_row(form.captchaCode) }}
+    <h1>Paiement</h1>
+    <button class="btn btn-success" id="checkout-button">Réserver</button>
+    </div>
+</div>
+{% endblock %}
+

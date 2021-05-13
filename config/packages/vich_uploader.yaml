@@ -6,11 +6,17 @@ vich_uploader:
         user_images:
             uri_prefix: uploads/images
             upload_destination: '%kernel.project_dir%/public/upload/images/'
-            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
         user_files:
             uri_prefix: uploads/fichiers
             upload_destination: '%kernel.project_dir%/public/upload/fichiers/'
-            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+        nutritionalProgram:
+            uri_prefix: uploads/images
+            upload_destination: '%kernel.project_dir%/public/upload/images/'
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
 #        member_image:
 #            uri_prefix: uploads/images/member
 #            upload_destination: '%kernel.project_dir%/public/uploads/images/member'

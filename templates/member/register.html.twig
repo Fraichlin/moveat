@@ -1,8 +1,9 @@
 {% extends 'baseFrontend.html.twig' %}
 
 {% block title %}Inscription membre{% endblock %}
-
+{% block activation3 %}active{% endblock %}
 {% block body %}
+    <h1 class="h3 mb-3 font-weight-normal">Incription Membre</h1>
     <div class="row" style="background-color: #f3d6a0;opacity: 0.9;">
         <div class="col-lg-8 mx-auto">
             {{ form_start(form,{attr: {'novalidate': 'novalidate'}}) }}

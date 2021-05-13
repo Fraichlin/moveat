@@ -28,7 +28,7 @@ use Symfony\Component\Validator\Constraints\Date;
 class AdminController extends AbstractController
 {
     /**
-     * @Route("/home", name="homeAdmin")
+     * @Route("/", name="homeAdmin")
      */
     public function home(UserRepository $repository): Response
     {

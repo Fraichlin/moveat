@@ -1,0 +1,34 @@
+{% block body %}
+    {% if programme %}
+    <h1>your programme</h1>
+    <table class="table">
+        <thead>
+        <tr>
+
+            <th>Name</th>
+            <th>Type</th>
+            <th>Description</th>
+            <th>Break_fast</th>
+            <th>Dinner</th>
+            <th>Lunch</th>
+        </tr>
+        </thead>
+        <tbody>
+
+
+            <tr>
+                <td>{{ programme.name }}</td>
+                <td>{{ programme.type }}</td>
+                <td>{{ programme.description }}</td>
+                <td>{{ programme.breackfast }}</td>
+                <td>{{ programme.lunch }}</td>
+                <td>{{ programme.dinner }}</td>
+            </tr>
+
+    {% else%}
+        <p>not found</p>
+    {% endif %}
+        </tbody>
+    </table>
+
+{% endblock %}

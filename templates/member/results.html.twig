@@ -1,0 +1,26 @@
+{% extends 'baseFrontend.html.twig' %}
+{% block body %}
+<h3>Votre taille est de  {{ taille }} m</h3>
+<h3>Votre poids est de {{ poids }} kg</h3>
+<br>
+<h3>Alors votre Indice de masse corporel est de {{ bmi }}</h3>
+
+<h3>{{ messageAboutBmi }}</h3>
+
+<br>
+<br>
+{% if (messageAboutBmi == "Votre poids est trop bas" and type == "A") %}
+    <!--input type="button" value="go" onclick="location={#  #}{ url ('prendre_poids') }}"!-->
+    <p>Nous vous proposons ce programme pour atteindre votre poids idéal</p>
+    <a href="{{ path('showA') }}">Allons-y!</a>
+
+{% elseif (messageAboutBmi == "Votre poids est trop haut" and type == "B") %}
+    <p>Nous vous proposons ce programme pour atteindre votre poids idéal</p>
+    <!--input type="button" value="go" onclick="location={#  #}{ url ('prendre_poids') }}"!-->
+    <a href="{{ path('showB') }}">Allons-y!</a>
+{% else%}
+    <p>Nous vous proposons ce programme pour maintenir votre poids</p>
+    <!--input type="button" value="go" onclick="location={#  #}{ url ('prendre_poids') }}"!-->
+    <a href="{{ path('showC') }}">Allons-y!</a>
+{% endif %}
+{% endblock %}

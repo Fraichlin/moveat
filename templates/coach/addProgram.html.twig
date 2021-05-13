@@ -1,0 +1,14 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}New Programme{% endblock %}
+{% block activation1 %}active{% endblock %}
+{% block body %}
+<section class="wrapper">
+    <h3><i class="fa fa-angle-right"></i>Add - Programme</h3>
+    <h1>Create new Programme</h1>
+
+    {{ include('coach/_form.html.twig') }}
+
+    <a href="{{ path('homeCoach') }}">back to list</a>
+    <section>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Programme index{% endblock %}
+
+{% block body %}
+    <h1>Programme index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Image</th>
+                <th>Description</th>
+                <th>Break_fast</th>
+                <th>Dinner</th>
+                <th>Lunch</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for p in programme %}
+            <tr>
+                <td>{{ p.id }}</td>
+                <td>{{ p.name }}</td>
+                <td>{{ p.type }}</td>
+                <td>{{ p.imageFile }}</td>
+                <td>{{ p.description }}</td>
+                <td>{{ p.breackfast }}</td>
+                <td>{{ p.lunch }}</td>
+                <td>{{ p.dinner }}</td>
+                <td>
+                    <a href="{{ path('programme_show', {'id': p.id}) }}">show</a>
+                    <a href="{{ path('programme_edit', {'id': p.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('programme_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Edit Programme{% endblock %}
+{% block activation1 %}active{% endblock %}
+{% block body %}
+<section class="wrapper">
+    <h3><i class="fa fa-angle-right"></i>Edit - Program</h3>
+    <h1>Edit Programme</h1>
+
+    {{ include('coach/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('programme_index') }}">back to list</a>
+
+    {{ include('coach/_delete_form.html.twig') }}
+</section>
+{% endblock %}

@@ -176,7 +176,6 @@ class UserController extends AbstractController
                     ->subject('Veuillez confirmer votre adresse mail')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
-            // do anything else you need here, like send an email
 
             return $guardHandler->authenticateUserAndHandleSuccess(
                 $member,
@@ -188,7 +187,8 @@ class UserController extends AbstractController
         }
 
         return $this->render('member/register.html.twig',[
-            'form' => $form->createView()
+            'form' => $form->createView(),
+
         ]);
     }
 

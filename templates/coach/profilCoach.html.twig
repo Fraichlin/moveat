@@ -1,0 +1,129 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}Profile{% endblock %}
+{% block body %}
+    <section class="wrapper site-min-height">
+        <h3><i class="fa fa-angle-right"></i> Profil - Coach</h3><a style="size: 12px;" class="fa fa-arrow-left" href="{{ app.request.headers.get('referer') }}">Retour</a>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    {% if not app.user.getPhoto %}
+                        <img style="width: 200px;height: 200px;" src="{{ asset( 'img/profilUser.png' ) }}" class="img-circle" alt="">
+                    {% else %}
+                        <img style="width: 200px;height: 200px;" src="{{ asset( 'upload/images/' ~ app.user.getPhoto ) }}" class="img-circle"  alt="">
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                    <h4>
+                        {{ app.user.getPrenom }} {{ app.user.getNom }}
+                    </h4>
+                    <h5>
+                        {{ app.user.getSpecialite }}
+                    </h5>
+                    <p class="proile-rating">Note générale : <span>8/10</span></p>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" aria-selected="true">A propos</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <form id="modify" style="display: inline-block" action="{{ url('updateProfileCoach',{'id':app.user.getId}) }}">
+                    <button class="btn btn-info" type="submit">
+                        Modifier mon compte
+                    </button>
+                </form>
+                <form id="deleteCoach" style="display: inline-block" action="{{ url('deleteProfileCoach',{'id':app.user.getId}) }}">
+                            <button class="btn btn-danger" onclick="event.preventDefault();
+                    confirm('Voulez-vous vraiment supprimer votre compte?' +
+                     ' Toutes vos informations seront supprimées et vous ne pourriez plus vous connecter.') &&
+                    document.getElementById('deleteCoach').submit();">
+                                Supprimer mon compte
+                            </button>
+                </form>
+            </div>
+        </div>
+        <div style="margin-top: -30px;" class="row">
+            <div class="col-md-4">
+
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Nom</b></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{ app.user.getNom }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Prénom</b></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{ app.user.getPrenom }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Username</b></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{ app.user.getUsername }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Email</b></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{ app.user.getEmail }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Sexe</b></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{ app.user.getSexe }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Téléphone</b></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{ app.user.getTelephone }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Adresse</b></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{ app.user.getAdresse }}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Justificatif</b></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p><a target="_blank" href="{{ asset( 'upload/fichiers/' ~ app.user.getJustificatif ) }}">Ouvrir fichier</a></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Date inscription</b></label>
+                    </div>
+                    <div class="col-md-6">
+                        <p>{{ app.user.getDateInscription | date}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

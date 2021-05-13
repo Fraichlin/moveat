@@ -1,0 +1,42 @@
+{% extends 'baseFrontend.html.twig' %}
+{% block title %}Liste des Nutritionistes{% endblock %}
+
+{% block body %}
+    <div class="row">
+    {% for n in nutrition %}
+        <div class="col">
+        <div class="card" style="width: 18rem;">
+
+
+            <img
+                    src="{{ asset('upload/images/' ~ n.photo) }}"
+                    class="card-img-top"
+                    alt="..."
+
+            />
+            <div class="card-body">
+                <h5 class="card-title">{{ n.nom }}</h5>
+                <p class="card-text">
+                    {{ n.prenom }}<br>
+                    {{ n.adresse }}<br>
+                    {{ n.telephone }}<br>
+                    {{ n.email }}<br>
+
+                </p>
+                <div class="card-footer">
+                    <a href="{{ 'teleconsultation' }}" class="btn btn-primary">consulter</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+        {% endfor %}
+    </div>
+    <div class="navigation">
+        {{ knp_pagination_render(nutrition) }}
+    </div>
+
+
+
+{% endblock %}

@@ -102,13 +102,13 @@ class UserLoginAuthenticator extends AbstractFormLoginAuthenticator implements P
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
-        if($token->getUser()->getRoles()[0] == "ROLE_ADMIN")
+        if($token->getUser()->getRoles()[0] == 'ROLE_ADMIN')
             return new RedirectResponse($this->urlGenerator->generate('homeAdmin'));
 
-        if($token->getUser()->getRoles()[0] == "ROLE_COACH")
+        if($token->getUser()->getRoles()[0] == 'ROLE_COACH')
             return new RedirectResponse($this->urlGenerator->generate('homeCoach'));
 
-        if($token->getUser()->getRoles()[0] == "ROLE_MEMBER")
+        if($token->getUser()->getRoles()[0] == 'ROLE_MEMBER')
             return new RedirectResponse($this->urlGenerator->generate('homeMember'));
 
         return new RedirectResponse($this->urlGenerator->generate('app_login'));

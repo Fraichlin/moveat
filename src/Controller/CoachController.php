@@ -2,12 +2,22 @@
 
 namespace App\Controller;
 
+use App\Entity\Appointment;
 use App\Entity\Coach;
+use App\Entity\Nutrition;
+use App\Entity\NutritionalProgram;
+use App\Form\AdminType;
+use App\Form\Appointment1Type;
 use App\Form\CoachType;
 use App\Form\MemberType;
+use App\Form\NutritionalProgramType;
 use App\Form\UserType;
+use App\Repository\AppointmentRepository;
 use App\Repository\MembreRepository;
+use App\Repository\NutritionalProgramRepository;
+use App\Repository\NutritionRepository;
 use App\Repository\UserRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -30,12 +40,15 @@ use Vich\UploaderBundle\Form\Type\VichFileType;
  */
 class CoachController extends AbstractController
 {
+
     /**
      * @Route("/home", name="homeCoach")
      */
-    public function home(): Response
+    public function home(NutritionalProgramRepository $repository): Response
     {
-        return $this->render('coach/home.html.twig');
+        return $this->render('coach/home.html.twig',[
+            'programme'=>$repository->findAll()
+        ]);
     }
     /**
      * @Route("/delete/{id}", name="deleteProfileCoach")
@@ -47,7 +60,7 @@ class CoachController extends AbstractController
         $em->remove($coach);
         $em->flush();
         $this->addFlash('success','Votre compte a été supprimé avec succès');
-        return $this->render("index.html.twig");
+        return $this->render("coach/home.html.twig");
     }
     /**
      * @return Response
@@ -91,4 +104,139 @@ class CoachController extends AbstractController
             'user'=>$coach
         ]);
     }
+    /**
+     * @return Response
+     * @Route("/profile",name="profileCoach")
+     */
+    public function profileAdmin(UserRepository $repository,Request $request,
+                                 UserPasswordEncoderInterface $encoder){
+        return $this->render('coach/profilCoach.html.twig');
+    }
+
+    /**
+     * @Route("/Program/new", name="programme_new", methods={"GET","POST"})
+     */
+    public function new(Request $request): Response
+    {
+        $programme = new NutritionalProgram();
+        $form = $this->createForm(NutritionalProgramType::class, $programme);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($programme);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('homeCoach');
+        }
+
+        return $this->render('coach/addProgram.html.twig', [
+            'programme' => $programme,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/Program/{id}", name="programme_show", methods={"GET"})
+     */
+    public function show(NutritionalProgramRepository $repository,$id): Response
+    {
+        $programme = $repository->find($id);
+        return $this->render('coach/showProgram.html.twig', [
+            'programme' => $programme,
+        ]);
+    }
+
+
+
+    /**
+     * @Route("/Program/{id}/edit", name="programme_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, NutritionalProgramRepository $repository,$id): Response
+    {
+        $programme = $repository->find($id);
+        $form = $this->createForm(NutritionalProgramType::class, $programme);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('homeCoach');
+        }
+
+        return $this->render('coach/editProgram.html.twig', [
+            'programme' => $programme,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/Program/{id}", name="programme_delete", methods={"DELETE"})
+     */
+    public function deleteProgram(Request $request, NutritionalProgramRepository $repository,$id): Response
+    {
+        $programme = $repository->find($id);
+        if ($this->isCsrfTokenValid('delete'.$programme->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($programme);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('homeCoach');
+    }
+
+    /**
+     * @Route("/appointment/list", name="listRdv", methods={"GET"})
+     */
+    public function listRdv(AppointmentRepository $appointmentRepository): Response
+    {
+        return $this->render('coach/listrdv.html.twig', [
+            'appointments' => $appointmentRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/appointment/{id}", name="appointment_show", methods={"GET"})
+     */
+    public function showRdv(Appointment $appointment): Response
+    {
+        return $this->render('coach/showRdv.html.twig', [
+            'appointment' => $appointment,
+        ]);
+    }
+
+    /**
+     * @Route("/appointment/{id}/edit", name="appointment_edit", methods={"GET","POST"})
+     */
+    public function editRdv(Request $request, Appointment $appointment): Response
+    {
+        $form = $this->createForm(Appointment1Type::class, $appointment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('listRdv');
+        }
+
+        return $this->render('coach/editRdv.html.twig', [
+            'appointment' => $appointment,
+            'form' => $form->createView(),
+        ]);
+    }
+    /**
+     * @Route("appointment/{id}", name="appointment_delete", methods={"DELETE"})
+     */
+    public function deleteRdv(Request $request, Appointment $appointment): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$appointment->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($appointment);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('listRdv');
+    }
+
+
 }

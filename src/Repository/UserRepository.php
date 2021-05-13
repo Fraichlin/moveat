@@ -92,6 +92,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ;
     }
 
+
     public function findValidedCoachByMonth($year,$month)
     {
         $fromTime = new \DateTime($year . '-' . $month . '-01');
@@ -204,8 +205,10 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $this->createQueryBuilder('u')
             ->Where('u.roles = :val')
             ->andWhere('u.specialite = :val1')
+            ->andWhere('u.statut = :val2')
             ->setParameter('val', ['["ROLE_COACH"]'])
             ->setParameter('val1', 'Nutritioniste')
+            ->setParameter('val2', 'actived')
             ->getQuery()
             ->getResult()
             ;
@@ -216,8 +219,10 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $this->createQueryBuilder('u')
             ->Where('u.roles = :val')
             ->andWhere('u.specialite = :val1')
+            ->andWhere('u.statut = :val2')
             ->setParameter('val', ['["ROLE_COACH"]'])
             ->setParameter('val1', 'Coach Sportif')
+            ->setParameter('val2', 'actived')
             ->getQuery()
             ->getResult()
             ;
@@ -228,8 +233,23 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $this->createQueryBuilder('u')
             ->Where('u.roles = :val')
             ->andWhere('u.specialite = :val1')
+            ->andWhere('u.statut = :val2')
             ->setParameter('val', ['["ROLE_COACH"]'])
             ->setParameter('val1', 'Psychothérapeute')
+            ->setParameter('val2', 'actived')
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
+    public function findActivedNutritionistCoach()
+    {
+        return $this->createQueryBuilder('u')
+            ->Where('u.roles = :val AND (u.statut = :val1 OR u.statut = :val2) AND u.specialite =:val3')
+            ->setParameter('val', ['["ROLE_COACH"]'])
+            ->setParameter('val1', 'actived')
+            ->setParameter('val2', 'unblocked')
+            ->setParameter('val3', 'Nutritioniste')
             ->getQuery()
             ->getResult()
             ;

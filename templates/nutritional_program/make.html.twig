@@ -1,0 +1,58 @@
+{% extends 'baseFrontend.html.twig' %}
+{% block title %}your programme{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Comments</h3>
+            </div><!-- /col-sm-12 -->
+        </div><!-- /row -->
+        {% for c in comments %}
+            <div class="row">
+                <div class="col-sm-5">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <strong>{{ c.authorName }}</strong> <span class="text-muted">commented At {{ c.createdAt | date('d/m/y') }}</span>
+                        </div>
+                        <div class="panel-body">
+                            {{ c.content }}
+                        </div><!-- /panel-body -->
+                    </div><!-- /panel panel-default -->
+                </div><!-- /col-sm-5 -->
+            </div><!-- /row -->
+        {% endfor %}
+    </div>
+    {% for p in programme %}
+        <div class="container">
+        <div class="row">
+        <div class="col-xs-12 col-sm-7" id="new_status">
+            <div class="navbar-nav col-xs-12" id="post_header" role="navigation">
+
+                <form action="{{ path('make',{'id': p.id}) }}" method="post" >
+                    <div class="col-xs-12" id="post_content">
+                        <div class="textarea_wrap">
+                            {{ form_start(commentForm) }}
+                            {{ form_widget(commentForm.content,{'attr':{'placeholder':'Leave Comment','class':'form-control','rows':'5'}}) }}
+                            {{ form_widget(commentForm) }}
+                            <div class="col-xs-5">
+                                <button class="btn btn-primary btn-block">{{ button_label|default('Post') }}</button>
+                            </div>
+                            {{ form_end(commentForm) }}
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    {% endfor %}
+    <script src="https://use.fontawesome.com/1dec14be15.js"></script>
+    <script>
+        // If user clicks anywhere outside of the modal, Modal will close
+        var modal = document.getElementById('modal-wrapper');
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+
+{% endblock %}

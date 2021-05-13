@@ -10,5 +10,14 @@
             {{ form_end(form) }}
         </div>
     </div>
+    <br>
+    <form id="deleteMember" style="display: inline-block" action="{{ url('deleteProfileMember',{'id':app.user.getId}) }}">
+        <button class="btn btn-info" onclick="event.preventDefault();
+        confirm('Voulez-vous vraiment supprimer votre compte?' +
+         ' Toutes vos informations seront supprimées et vous ne pourriez plus vous connecter.') &&
+        document.getElementById('deleteMember').submit();">
+            Supprimer mon compte
+        </button>
+    </form>
 
 {% endblock %}

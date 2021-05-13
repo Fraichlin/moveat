@@ -15,17 +15,14 @@
         {% else %}
             <img src="{{ asset( 'upload/images/' ~ app.user.getPhoto ) }}" class="img-circle" width="80">
         {% endif %}
-        <a class="btn btn-info" href="{{ url('updateProfileMember',{'id':app.user.getId}) }}">
-            Modifier mon profil
+        <a class="btn btn-info" href="{{ url('results',{'id':app.user.getId}) }}">
+            Découvrer votre programme nutritionel
         </a>
-        <form id="deleteMember" style="display: inline-block" action="{{ url('deleteProfileMember',{'id':app.user.getId}) }}">
-            <button class="btn btn-info" onclick="event.preventDefault();
-        confirm('Voulez-vous vraiment supprimer votre compte?' +
-         ' Toutes vos informations seront supprimées et vous ne pourriez plus vous connecter.') &&
-        document.getElementById('deleteMember').submit();">
-                Supprimer mon compte
-            </button>
-        </form>
-        <a class="btn btn-success" href="{{ url('app_logout') }}">Se deconnecter</a>
+        <a class="btn btn-info" href="http://127.0.0.1:8001/program/">
+            Découvrer votre programme sportif
+        </a>
+        <a class="btn btn-info" href="http://127.0.0.1:8002/programs/">
+            Découvrer votre programme psychothérapeute
+        </a>
     </div>
 {% endblock %}

@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Exception;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -162,6 +164,22 @@ class User implements UserInterface,\Serializable
      * @ORM\Column(type="boolean")
      */
     private $isVerified = false;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="patient")
+     */
+    private $comments;
+
+    /**
+     * @ORM\OneToMany(targetEntity=NutritionalProgram::class, mappedBy="nutritionist")
+     */
+    private $nutritionalPrograms;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+        $this->nutritionalPrograms = new ArrayCollection();
+    }
 
 
 
@@ -537,4 +555,67 @@ class User implements UserInterface,\Serializable
     {
         return $this->isVerified;
     }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setPatient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getPatient() === $this) {
+                $comment->setPatient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|NutritionalProgram[]
+     */
+    public function getNutritionalPrograms(): Collection
+    {
+        return $this->nutritionalPrograms;
+    }
+
+    public function addNutritionalProgram(NutritionalProgram $nutritionalProgram): self
+    {
+        if (!$this->nutritionalPrograms->contains($nutritionalProgram)) {
+            $this->nutritionalPrograms[] = $nutritionalProgram;
+            $nutritionalProgram->setNutritionist($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNutritionalProgram(NutritionalProgram $nutritionalProgram): self
+    {
+        if ($this->nutritionalPrograms->removeElement($nutritionalProgram)) {
+            // set the owning side to null (unless already changed)
+            if ($nutritionalProgram->getNutritionist() === $this) {
+                $nutritionalProgram->setNutritionist(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+
 }
