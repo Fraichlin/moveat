@@ -21,13 +21,16 @@ return [
         '/calendar/new' => [[['_route' => 'calendar_new', '_controller' => 'App\\Controller\\CalendarController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/coachlist' => [[['_route' => 'coachlist', '_controller' => 'App\\Controller\\CoachlistController::index'], null, null, null, false, false, null]],
         '/home' => [[['_route' => 'home', '_controller' => 'App\\Controller\\HomeController::index'], null, null, null, false, false, null]],
+        '/addProgramme' => [[['_route' => 'addProgramme', '_controller' => 'App\\Controller\\JsonController::ajouterProgramme'], null, null, null, false, false, null]],
+        '/deleteAppointment' => [[['_route' => 'deleteAppointment', '_controller' => 'App\\Controller\\JsonController::deleteAppointmentAction'], null, null, null, false, false, null]],
+        '/updateAppointment' => [[['_route' => 'updateAppointment', '_controller' => 'App\\Controller\\JsonController::modifierAppointmentAction'], null, null, null, false, false, null]],
+        '/displayProgramme' => [[['_route' => 'displayProgramme', '_controller' => 'App\\Controller\\JsonController::allprogram'], null, null, null, false, false, null]],
+        '/detailAppointment' => [[['_route' => 'detail_reclamation', '_controller' => 'App\\Controller\\JsonController::detailAppointmentAction'], null, null, null, false, false, null]],
         '/program' => [[['_route' => 'program', '_controller' => 'App\\Controller\\ProgramController::index'], null, null, null, false, false, null]],
         '/calendrier' => [[['_route' => 'calendrier', '_controller' => 'App\\Controller\\ProgramController::calendar'], null, null, null, false, false, null]],
         '/programme' => [[['_route' => 'programme_index', '_controller' => 'App\\Controller\\ProgrammeController::index'], null, ['GET' => 0], null, true, false, null]],
         '/programme/new' => [[['_route' => 'programme_new', '_controller' => 'App\\Controller\\ProgrammeController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/stories' => [[['_route' => 'stories', '_controller' => 'App\\Controller\\StoriesController::index'], null, null, null, false, false, null]],
-        '/teleconsultation' => [[['_route' => 'teleconsultation', '_controller' => 'App\\Controller\\TeleconsultationController::index'], null, null, null, false, false, null]],
-        '/rendezvous' => [[['_route' => 'app_teleconsultation_add', '_controller' => 'App\\Controller\\TeleconsultationController::Add'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'

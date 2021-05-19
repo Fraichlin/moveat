@@ -10,7 +10,7 @@ if (in_array(PHP_SAPI, ['cli', 'phpdbg'], true)) {
 }
 
 require dirname(__DIR__, 3).''.\DIRECTORY_SEPARATOR.'vendor/autoload.php';
-require __DIR__.'/ContainerTqvsUTs/srcApp_KernelDevDebugContainer.php';
+require __DIR__.'/ContainerFDunmFN/srcApp_KernelDevDebugContainer.php';
 
 $classes = [];
 $classes[] = 'Symfony\Bundle\FrameworkBundle\FrameworkBundle';
@@ -39,12 +39,12 @@ $classes[] = 'App\Controller\BackController';
 $classes[] = 'App\Controller\CalendarController';
 $classes[] = 'App\Controller\CoachlistController';
 $classes[] = 'App\Controller\HomeController';
+$classes[] = 'App\Controller\JsonController';
 $classes[] = 'App\Controller\ProgramController';
 $classes[] = 'App\Controller\ProgrammeController';
 $classes[] = 'App\Controller\StoriesController';
-$classes[] = 'App\Controller\TeleconsultationController';
 $classes[] = 'App\Form\CalendarType';
-$classes[] = 'App\Form\Programme1Type';
+$classes[] = 'App\Form\ProgrammeType';
 $classes[] = 'App\Repository\CalendarRepository';
 $classes[] = 'App\Repository\ProgrammeRepository';
 $classes[] = 'Doctrine\DBAL\Tools\Console\Command\RunSqlCommand';

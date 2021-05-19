@@ -27,6 +27,11 @@ return [
     'calendar_delete' => [['id'], ['_controller' => 'App\\Controller\\CalendarController::delete'], [], [['variable', '/', '[^/]++', 'id'], ['text', '/calendar']], [], []],
     'coachlist' => [[], ['_controller' => 'App\\Controller\\CoachlistController::index'], [], [['text', '/coachlist']], [], []],
     'home' => [[], ['_controller' => 'App\\Controller\\HomeController::index'], [], [['text', '/home']], [], []],
+    'addProgramme' => [[], ['_controller' => 'App\\Controller\\JsonController::ajouterProgramme'], [], [['text', '/addProgramme']], [], []],
+    'deleteAppointment' => [[], ['_controller' => 'App\\Controller\\JsonController::deleteAppointmentAction'], [], [['text', '/deleteAppointment']], [], []],
+    'updateAppointment' => [[], ['_controller' => 'App\\Controller\\JsonController::modifierAppointmentAction'], [], [['text', '/updateAppointment']], [], []],
+    'displayProgramme' => [[], ['_controller' => 'App\\Controller\\JsonController::allprogram'], [], [['text', '/displayProgramme']], [], []],
+    'detail_reclamation' => [[], ['_controller' => 'App\\Controller\\JsonController::detailAppointmentAction'], [], [['text', '/detailAppointment']], [], []],
     'program' => [[], ['_controller' => 'App\\Controller\\ProgramController::index'], [], [['text', '/program']], [], []],
     'calendrier' => [[], ['_controller' => 'App\\Controller\\ProgramController::calendar'], [], [['text', '/calendrier']], [], []],
     'programme_index' => [[], ['_controller' => 'App\\Controller\\ProgrammeController::index'], [], [['text', '/programme/']], [], []],
@@ -35,6 +40,4 @@ return [
     'programme_edit' => [['id'], ['_controller' => 'App\\Controller\\ProgrammeController::edit'], [], [['text', '/edit'], ['variable', '/', '[^/]++', 'id'], ['text', '/programme']], [], []],
     'programme_delete' => [['id'], ['_controller' => 'App\\Controller\\ProgrammeController::delete'], [], [['variable', '/', '[^/]++', 'id'], ['text', '/programme']], [], []],
     'stories' => [[], ['_controller' => 'App\\Controller\\StoriesController::index'], [], [['text', '/stories']], [], []],
-    'teleconsultation' => [[], ['_controller' => 'App\\Controller\\TeleconsultationController::index'], [], [['text', '/teleconsultation']], [], []],
-    'app_teleconsultation_add' => [[], ['_controller' => 'App\\Controller\\TeleconsultationController::Add'], [], [['text', '/rendezvous']], [], []],
 ];

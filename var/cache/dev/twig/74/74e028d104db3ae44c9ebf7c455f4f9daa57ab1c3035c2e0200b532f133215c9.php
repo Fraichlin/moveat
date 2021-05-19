@@ -211,11 +211,12 @@ class __TwigTemplate_1e4dfd3bf756b37bfcc8c889e29c2cc9c9dfcddc89d93349b2eba8a15d1
                     <div class=\"sidebar-box ftco-animate\">
                         <div class=\"categories\">
                             <h3>Services</h3>
-                            <li><a href=\"#\">Workouts<span class=\"ion-ios-arrow-forward\"></span></a></li>
+                            <li><a href=\"programme\">Listes des programmes<span class=\"ion-ios-arrow-forward\"></span></a></li>
                             <li><a href=\"#\">Challenges<span class=\"ion-ios-arrow-forward\"></span></a></li>
                             <li><a href=\"#\">guides<span class=\"ion-ios-arrow-forward\"></span></a></li>
                             <li><a href=\"calendrier\">Calendrier<span class=\"ion-ios-arrow-forward\"></span></a></li>
                             <li><a href=\"calendar\">modifier calendrier<span class=\"ion-ios-arrow-forward\"></span></a></li>
+
                         </div>
                     </div>
 
@@ -242,7 +243,7 @@ class __TwigTemplate_1e4dfd3bf756b37bfcc8c889e29c2cc9c9dfcddc89d93349b2eba8a15d1
                                         src=\"https://www.youtube.com/embed/vlDzYIIOYmM\"
                                         title=\"YouTube video\"
                                         allowfullscreen></iframe>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -457,11 +458,12 @@ class __TwigTemplate_1e4dfd3bf756b37bfcc8c889e29c2cc9c9dfcddc89d93349b2eba8a15d1
                     <div class=\"sidebar-box ftco-animate\">
                         <div class=\"categories\">
                             <h3>Services</h3>
-                            <li><a href=\"#\">Workouts<span class=\"ion-ios-arrow-forward\"></span></a></li>
+                            <li><a href=\"programme\">Listes des programmes<span class=\"ion-ios-arrow-forward\"></span></a></li>
                             <li><a href=\"#\">Challenges<span class=\"ion-ios-arrow-forward\"></span></a></li>
                             <li><a href=\"#\">guides<span class=\"ion-ios-arrow-forward\"></span></a></li>
                             <li><a href=\"calendrier\">Calendrier<span class=\"ion-ios-arrow-forward\"></span></a></li>
                             <li><a href=\"calendar\">modifier calendrier<span class=\"ion-ios-arrow-forward\"></span></a></li>
+
                         </div>
                     </div>
 
@@ -488,7 +490,7 @@ class __TwigTemplate_1e4dfd3bf756b37bfcc8c889e29c2cc9c9dfcddc89d93349b2eba8a15d1
                                         src=\"https://www.youtube.com/embed/vlDzYIIOYmM\"
                                         title=\"YouTube video\"
                                         allowfullscreen></iframe>
-                            
+
                         </div>
                     </div>
                 </div>

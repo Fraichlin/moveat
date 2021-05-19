@@ -19,23 +19,52 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="913f35bb-4d95-4842-bb2e-dc64dbd79ecb" name="Default Changelist" comment="back and front">
-      <change afterPath="$PROJECT_DIR$/public/imgback/yassine.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="913f35bb-4d95-4842-bb2e-dc64dbd79ecb" name="Default Changelist" comment="back and front v1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/back/basictable.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/back/basictable.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/baseback.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/baseback.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210310155815.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/migrations/Version20210331105251.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/CalendarController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CalendarController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProgramController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProgramController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProgrammeController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/TeleconsultationController.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Calendar.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Calendar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/Programme1Type.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/calendar/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/calendar/index.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/calendar/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/calendar/new.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/program/program.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/program/program.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/programme/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/programme/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/programme/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/programme/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/programme/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/programme/new.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/programme/show.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/programme/show.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/var/cache/dev/profiler/16/60/436016" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/profiler/16/60/436016" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/programme/_delete_form.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/programme/_form.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/programme/edit.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/programme/index.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/programme/new.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/programme/show.html.twig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/ContainerRAsGY6H/removed-ids.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/ContainerRAsGY6H/srcApp_KernelDevDebugContainer.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/UrlGenerator.php" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/UrlGenerator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/UrlGenerator.php.meta" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/UrlGenerator.php.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/UrlMatcher.php" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/UrlMatcher.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/UrlMatcher.php.meta" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/UrlMatcher.php.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/var/cache/dev/profiler/index.csv" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/profiler/index.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/var/cache/dev/twig/27/271c4ad1ee18690e832a237b21287da02daba08edf7721a8e06d18a5ae2ae9c4.php" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/twig/27/271c4ad1ee18690e832a237b21287da02daba08edf7721a8e06d18a5ae2ae9c4.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/var/cache/dev/twig/2e/2e8971190191f222bbaa2a7e74df650a0432bbc807170b719cb0d45e66fbd924.php" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/twig/2e/2e8971190191f222bbaa2a7e74df650a0432bbc807170b719cb0d45e66fbd924.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/var/cache/dev/twig/4a/4a17499eddbfeb8edaff0429e306cc5c9472f6bc024d6762a7db52f7a8ce2be6.php" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/twig/4a/4a17499eddbfeb8edaff0429e306cc5c9472f6bc024d6762a7db52f7a8ce2be6.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/srcApp_KernelDevDebugContainer.php" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/srcApp_KernelDevDebugContainer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/srcApp_KernelDevDebugContainer.php.meta" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/srcApp_KernelDevDebugContainer.php.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/srcApp_KernelDevDebugContainer.preload.php" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/srcApp_KernelDevDebugContainer.preload.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/srcApp_KernelDevDebugContainer.xml" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/srcApp_KernelDevDebugContainer.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/srcApp_KernelDevDebugContainer.xml.meta" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/srcApp_KernelDevDebugContainer.xml.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/srcApp_KernelDevDebugContainerCompiler.log" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/srcApp_KernelDevDebugContainerCompiler.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/twig/23/2314c3cf3495af49e8fe45f2a770de5e74d1862969cfb2e3398df6d66700143d.php" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/twig/23/2314c3cf3495af49e8fe45f2a770de5e74d1862969cfb2e3398df6d66700143d.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/twig/38/3863ed269ee03501d2880f08c380cade7d6cd61620e3a8af9bf93a3e7baa61a9.php" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/twig/38/3863ed269ee03501d2880f08c380cade7d6cd61620e3a8af9bf93a3e7baa61a9.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/twig/49/492f2e8ec1f2274a64bc12e202a1c6704b9185760e4e76acf260125e7da40c26.php" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/twig/49/492f2e8ec1f2274a64bc12e202a1c6704b9185760e4e76acf260125e7da40c26.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/twig/6a/6a67ff9573b42faf11e39b213723c25eb3c0330200d773eac82a33fb432207c3.php" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/twig/6a/6a67ff9573b42faf11e39b213723c25eb3c0330200d773eac82a33fb432207c3.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/var/cache/dev/twig/74/74e028d104db3ae44c9ebf7c455f4f9daa57ab1c3035c2e0200b532f133215c9.php" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/twig/74/74e028d104db3ae44c9ebf7c455f4f9daa57ab1c3035c2e0200b532f133215c9.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/twig/7e/7e026350d8d1b6c50271b83528b4eaec4920ce49c85b80f75f7965b36025c264.php" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/twig/7e/7e026350d8d1b6c50271b83528b4eaec4920ce49c85b80f75f7965b36025c264.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/twig/86/86a07c9ac74158d450848c9d1de016b6aab6af349f14566ff0c8f5a34ad72cb2.php" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/twig/86/86a07c9ac74158d450848c9d1de016b6aab6af349f14566ff0c8f5a34ad72cb2.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/twig/a1/a117d687c0d80a2ea6c017e4fdd3a3ee040693125fb266f5e4e48a94b1bffc1b.php" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/twig/a1/a117d687c0d80a2ea6c017e4fdd3a3ee040693125fb266f5e4e48a94b1bffc1b.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/twig/af/af79413bc78539a4325a0756a82aa42b32eeaaa4b72f46a1f3077ac681ccf555.php" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/twig/af/af79413bc78539a4325a0756a82aa42b32eeaaa4b72f46a1f3077ac681ccf555.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/twig/bd/bd0017f62ff21b1ca33f8dc1045b3e2e56baced563a5d74082a30f0d71cbd0d3.php" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/twig/bd/bd0017f62ff21b1ca33f8dc1045b3e2e56baced563a5d74082a30f0d71cbd0d3.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/twig/c6/c66d125870972b9b34119be27f8c9a4016f17dd07382fdb3752103de2baf8234.php" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/twig/c6/c66d125870972b9b34119be27f8c9a4016f17dd07382fdb3752103de2baf8234.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/twig/cc/cc4c95acfc4c63cf2a5a4f22257c12fab8394a790032b5a86150076a46e940bc.php" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/twig/cc/cc4c95acfc4c63cf2a5a4f22257c12fab8394a790032b5a86150076a46e940bc.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/twig/e6/e67fee341f8d07cf4b6f410348a0320e5a71ae1627bb1545fc69aaaf123648c5.php" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/twig/e6/e67fee341f8d07cf4b6f410348a0320e5a71ae1627bb1545fc69aaaf123648c5.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/var/cache/dev/twig/fb/fbbef32d700c6a82cfa5597d352337508c0230ce30a5ec1efe3685c1a1562e90.php" beforeDir="false" afterPath="$PROJECT_DIR$/var/cache/dev/twig/fb/fbbef32d700c6a82cfa5597d352337508c0230ce30a5ec1efe3685c1a1562e90.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/var/log/dev.log" beforeDir="false" afterPath="$PROJECT_DIR$/var/log/dev.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -177,6 +206,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js.buildTools.grunt.grunt-cli.package" value="" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
@@ -232,7 +262,15 @@
       <workItem from="1617095282407" duration="9914000" />
       <workItem from="1617178184487" duration="17422000" />
       <workItem from="1617312212952" duration="33000" />
-      <workItem from="1617312336213" duration="5145000" />
+      <workItem from="1617312336213" duration="7001000" />
+      <workItem from="1617439363690" duration="32000" />
+      <workItem from="1619998057392" duration="66000" />
+      <workItem from="1620044986191" duration="8483000" />
+      <workItem from="1620079543513" duration="549000" />
+      <workItem from="1620083111403" duration="1831000" />
+      <workItem from="1621093812937" duration="108000" />
+      <workItem from="1621272678156" duration="6147000" />
+      <workItem from="1621459166878" duration="568000" />
     </task>
     <task id="LOCAL-00001" summary="teleconsultation controller">
       <created>1614547077121</created>
@@ -297,7 +335,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617208044148</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="back and front v1">
+      <created>1617397927310</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1617397927467</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -326,51 +371,7 @@
     <MESSAGE value="added astuces;coach;stories" />
     <MESSAGE value="programme" />
     <MESSAGE value="back and front" />
-    <option name="LAST_COMMIT_MESSAGE" value="back and front" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="137" y="23" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1615035091026">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state x="137" y="23" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.738@0.0.1366.738" timestamp="1615035091026" />
-    <state x="447" y="170" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1617103054245">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state x="447" y="170" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.738@0.0.1366.738" timestamp="1617103054245" />
-    <state x="455" y="111" key="FileChooserDialogImpl" timestamp="1617313107091">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state x="455" y="111" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1617313107091" />
-    <state x="501" y="135" key="NewPhpClassDialog" timestamp="1614699078637">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="501" y="135" key="NewPhpClassDialog/0.0.1536.824@0.0.1536.824" timestamp="1614699078637" />
-    <state x="604" y="336" key="NewPhpFileDialog" timestamp="1614718701271">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="604" y="336" key="NewPhpFileDialog/0.0.1536.824@0.0.1536.824" timestamp="1614718701271" />
-    <state x="176" y="15" key="SettingsEditor" timestamp="1617313120164">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state x="176" y="15" key="SettingsEditor/0.0.1366.738@0.0.1366.738" timestamp="1617313120164" />
-    <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1614589309149" />
-    <state x="321" y="130" key="Vcs.Push.Dialog.v2" timestamp="1617394374790">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state x="321" y="130" key="Vcs.Push.Dialog.v2/0.0.1366.738@0.0.1366.738" timestamp="1617394374790" />
-    <state x="361" y="145" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1614722169727" />
-    <state x="585" y="146" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog" timestamp="1614589792277">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="585" y="146" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog/0.0.1536.824@0.0.1536.824" timestamp="1614589792277" />
-    <state x="521" y="292" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1615038411845">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state x="521" y="292" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.738@0.0.1366.738" timestamp="1615038411845" />
-    <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824@0.0.1536.824" timestamp="1614548384602" />
-    <state x="339" y="165" key="run.anything.popup" timestamp="1617103401881">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state x="339" y="165" key="run.anything.popup/0.0.1366.738@0.0.1366.738" timestamp="1617103401881" />
+    <MESSAGE value="back and front v1" />
+    <option name="LAST_COMMIT_MESSAGE" value="back and front v1" />
   </component>
 </project>

@@ -85,7 +85,7 @@ class __TwigTemplate_db65fbc9c888a77d13926181cba2ae0c74f21806e60404c0e5fb37b496e
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
         // line 6
-        echo "    <h1>Programme index</h1>
+        echo "    <h1>mes programmes</h1>
 
     <table class=\"table\">
         <thead>
@@ -126,11 +126,11 @@ class __TwigTemplate_db65fbc9c888a77d13926181cba2ae0c74f21806e60404c0e5fb37b496e
                     <a href=\"";
             // line 26
             echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("programme_show", ["id" => twig_get_attribute($this->env, $this->source, $context["programme"], "id", [], "any", false, false, false, 26)]), "html", null, true);
-            echo "\">show</a>
+            echo "\">Afficher les programmes /</a>
                     <a href=\"";
             // line 27
             echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("programme_edit", ["id" => twig_get_attribute($this->env, $this->source, $context["programme"], "id", [], "any", false, false, false, 27)]), "html", null, true);
-            echo "\">edit</a>
+            echo "\">Modifier les programmes</a>
                 </td>
             </tr>
         ";
@@ -153,7 +153,7 @@ class __TwigTemplate_db65fbc9c888a77d13926181cba2ae0c74f21806e60404c0e5fb37b496e
     <a href=\"";
         // line 38
         echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("programme_new");
-        echo "\">Create new</a>
+        echo "\">Ajouter un nouveau programme</a>
 ";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
@@ -185,7 +185,7 @@ class __TwigTemplate_db65fbc9c888a77d13926181cba2ae0c74f21806e60404c0e5fb37b496e
 {% block title %}Programme index{% endblock %}
 
 {% block body %}
-    <h1>Programme index</h1>
+    <h1>mes programmes</h1>
 
     <table class=\"table\">
         <thead>
@@ -205,8 +205,8 @@ class __TwigTemplate_db65fbc9c888a77d13926181cba2ae0c74f21806e60404c0e5fb37b496e
                 <td>{{ programme.description }}</td>
                 <td>{{ programme.image }}</td>
                 <td>
-                    <a href=\"{{ path('programme_show', {'id': programme.id}) }}\">show</a>
-                    <a href=\"{{ path('programme_edit', {'id': programme.id}) }}\">edit</a>
+                    <a href=\"{{ path('programme_show', {'id': programme.id}) }}\">Afficher les programmes /</a>
+                    <a href=\"{{ path('programme_edit', {'id': programme.id}) }}\">Modifier les programmes</a>
                 </td>
             </tr>
         {% else %}
@@ -217,8 +217,8 @@ class __TwigTemplate_db65fbc9c888a77d13926181cba2ae0c74f21806e60404c0e5fb37b496e
         </tbody>
     </table>
 
-    <a href=\"{{ path('programme_new') }}\">Create new</a>
+    <a href=\"{{ path('programme_new') }}\">Ajouter un nouveau programme</a>
 {% endblock %}
-", "programme/index.html.twig", "C:\\Users\\Yassine Harbaoui\\Documents\\GitHub\\moveat\\templates\\programme\\index.html.twig");
+", "programme/index.html.twig", "C:\\Users\\Yassine Harbaoui\\Documents\\GitHub\\pushing\\moveat\\templates\\programme\\index.html.twig");
     }
 }

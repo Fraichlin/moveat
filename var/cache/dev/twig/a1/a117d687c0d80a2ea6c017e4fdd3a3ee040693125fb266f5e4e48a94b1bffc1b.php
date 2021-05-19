@@ -85,7 +85,7 @@ class __TwigTemplate_9317bb803c33eec8dbc911e71f24e3e41001ae66505b8f9ccc9f2c36a29
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
         // line 6
-        echo "    <h1>Calendar index</h1>
+        echo "    <h1>Créer une nouvelle tache</h1>
 
     <table class=\"table\">
         <thead>
@@ -210,7 +210,7 @@ class __TwigTemplate_9317bb803c33eec8dbc911e71f24e3e41001ae66505b8f9ccc9f2c36a29
 {% block title %}Calendar index{% endblock %}
 
 {% block body %}
-    <h1>Calendar index</h1>
+    <h1>Créer une nouvelle tache</h1>
 
     <table class=\"table\">
         <thead>
@@ -254,6 +254,6 @@ class __TwigTemplate_9317bb803c33eec8dbc911e71f24e3e41001ae66505b8f9ccc9f2c36a29
 
     <a href=\"{{ path('calendar_new') }}\">Create new</a>
 {% endblock %}
-", "calendar/index.html.twig", "C:\\Users\\Yassine Harbaoui\\Documents\\GitHub\\moveat\\templates\\calendar\\index.html.twig");
+", "calendar/index.html.twig", "C:\\Users\\Yassine Harbaoui\\Documents\\GitHub\\pushing\\moveat\\templates\\calendar\\index.html.twig");
     }
 }

@@ -85,7 +85,7 @@ class __TwigTemplate_d75074982bf874db6eaa421c04feb6a68974a0e1b079bd9d7b8e7a94e94
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
         // line 6
-        echo "    <h1>Create new Calendar</h1>
+        echo "    <h1>Create new Task</h1>
 
     ";
         // line 8
@@ -127,12 +127,12 @@ class __TwigTemplate_d75074982bf874db6eaa421c04feb6a68974a0e1b079bd9d7b8e7a94e94
 {% block title %}New Calendar{% endblock %}
 
 {% block body %}
-    <h1>Create new Calendar</h1>
+    <h1>Create new Task</h1>
 
     {{ include('calendar/_form.html.twig') }}
 
     <a href=\"{{ path('calendar_index') }}\">back to list</a>
 {% endblock %}
-", "calendar/new.html.twig", "C:\\Users\\Yassine Harbaoui\\Documents\\GitHub\\moveat\\templates\\calendar\\new.html.twig");
+", "calendar/new.html.twig", "C:\\Users\\Yassine Harbaoui\\Documents\\GitHub\\pushing\\moveat\\templates\\calendar\\new.html.twig");
     }
 }

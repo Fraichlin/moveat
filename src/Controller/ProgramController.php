@@ -6,6 +6,7 @@ use App\Repository\CalendarRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class ProgramController extends AbstractController
 {
@@ -24,10 +25,14 @@ class ProgramController extends AbstractController
    /**
      * @Route("/calendrier", name="calendrier")
      */
-    public function calendar(CalendarRepository $calendar): Response
+    public function calendar(CalendarRepository $calendar,SerializerInterface $serializerInterface): Response
     {
+
         $events = $calendar->findAll();
+        $json = $serializerInterface ->serialize($calendar,'json',['groups'=>'calendar']);
+
         $rdvs = [];
+
         foreach($events as $event){
             $rdvs[] = [
                 'id' => $event->getId(),
@@ -40,6 +45,7 @@ class ProgramController extends AbstractController
                 'textColor' => $event->getTextColor(),
                 'allDay' => $event->getAllDay(),
             ];
+
         }
         $data = json_encode($rdvs);
 

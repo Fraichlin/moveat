@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CalendarRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=CalendarRepository::class)
@@ -14,46 +15,55 @@ class Calendar
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("calendar")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Groups("calendar")
      */
     private $title;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups("calendar")
      */
     private $start;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups("calendar")
      */
     private $end;
 
     /**
      * @ORM\Column(type="text")
+     * @Groups("calendar")
      */
     private $description;
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups("calendar")
      */
     private $all_day;
 
     /**
      * @ORM\Column(type="string", length=7)
+     * @Groups("calendar")
      */
     private $background_color;
 
     /**
      * @ORM\Column(type="string", length=7)
+     * @Groups("calendar")
      */
     private $border_color;
 
     /**
      * @ORM\Column(type="string", length=7)
+     * @Groups("calendar")
      */
     private $text_color;
 
