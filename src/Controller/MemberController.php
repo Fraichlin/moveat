@@ -2,18 +2,23 @@
 
 namespace App\Controller;
 
+use App\Entity\Article;
 use App\Entity\Coach;
 use App\Entity\Comment;
 use App\Entity\Membre;
 use App\Entity\NutritionalProgram;
+use App\Entity\Postuler;
+use App\Entity\Programs;
 use App\Form\CoachType;
 use App\Form\CommentType;
 use App\Form\MemberType;
 use App\Repository\AdministrateurRepository;
+use App\Repository\ArticleRepository;
 use App\Repository\CoachRepository;
 use App\Repository\CommentRepository;
 use App\Repository\MembreRepository;
 use App\Repository\NutritionalProgramRepository;
+use App\Repository\PostulerRepository;
 use App\Repository\SportProgramRepository;
 use App\Repository\UserRepository;
 use Dompdf\Dompdf;
@@ -277,36 +282,63 @@ class MemberController extends AbstractController
         return $this->render('member/sportProgram.html.twig');
     }
 
-//    /**
-//     * @Route("/psyProgram", name="programs_index", methods={"GET"})
-//     */
-//    public function index(SportProgramRepository $repository): Response
-//    {
-//        return $this->render('member/sportProgram.html.twig', [
-//            'programs' => $repository->findAll(),
-//        ]);
-//    }
-//
-//    /**
-//     * @Route("/psyProgram/search",name="search")
-//     */
-//    function search(SportProgramRepository $repository, Request $request){
-//        $data=$request->get('cherche');
-//
-//        $programs=$repository->findBy(['program'=>$data]);
-//        return $this->render('member/sportProgram.html.twig', [
-//            'programs' => $programs,
-//        ]);
-//    }
-//
-//    /**
-//     * @Route("/psyProgram/check", name="check")
-//     */
-//    public function check(): Response
-//    {
-//        return $this->render('member/checkPsyProgram.html.twig', [
-//            'controller_name' => 'CheckController',
-//        ]);
-//    }
+
+    //programme psy
+
+    /**
+     * @Route("/{id}/like", name="post_like")
+     * @param Programs $programs
+     * @param PostulerRepository $postulerRepository
+     * @param UserRepository $repository
+     * @return Response
+     */
+
+    public function like(Programs $programs,PostulerRepository $postulerRepository,UserRepository $repository): Response
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $user=$repository->find($this->get('session')->get('id'));
+        if(!$user) return $this->json([
+            'code'=>403,
+            'message'=>"Unauthorized"
+        ],403);
+        if($programs->isLikedByUser($user))
+        {
+            $like = $postulerRepository->findOneBy([
+                'program'=>$programs,
+                'user'=>$user
+            ]);
+
+            $entityManager->remove($like);
+            $entityManager->flush();
+            return $this->json([
+                'code'=>200,
+                'message'=>'like bien supprimé',
+                'likes'=>$postulerRepository->count(['program'=>$programs])
+            ],200);
+        }
+        $like = new Postuler();
+        $like->setProgram($programs);
+        $like->setUser($user);
+        $entityManager->persist($like);
+        $entityManager->flush();
+        return  $this->json([
+            'code'=>200,
+            'message'=>'ca marche',
+            'likes'=>$postulerRepository->count(['program'=>$programs])
+        ],200);
+    }
+
+    /**
+     * @Route("/idsh_psy/{id}", name="article_showf", methods={"GET"})
+     */
+    public function showf(ArticleRepository $articleRepository, $id): Response
+    {
+        $article = $articleRepository;
+        $repository = $this->getDoctrine()->getRepository(Article::class);
+        $article = $repository->find($id);
+        return $this->render('article/showf.html.twig', [
+            'article' =>$article,
+        ]);
+    }
 
 }

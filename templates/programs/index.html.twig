@@ -1,0 +1,40 @@
+{% extends 'baseFrontend.html.twig' %}
+
+{% block body %}
+    <h1>Good mental health tips</h1>
+
+    <table class="table">
+        <thead>
+       <form method="post" action="{{ path('search') }}">
+           <label>Search</label>
+           <input type="text" name="cherche"> <input type="submit" value="search">
+       </form>
+            <tr>
+                <!--th>Id</th!-->
+                <th>Program</th>
+                <th>check<th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for p in programs %}
+            <tr>
+                <!--td>{#{ program.id }#}</td!-->
+                <td>{{ p.program }}</td>
+                <td>
+                    <a href={{ url('article_showf',{'id': p.id})  }} class="btn btn-info">check</a>
+                    <!--a href="{{ path('programs_edit', {'id': p.id}) }}">edit</a!-->
+{% if app.session.get('id')!=null %}
+                    <a  href="{{ path('post_like',{'id':p.id})}}" class="btn btn-apply btn-primary  js-like">Like
+                        <span class="js-likes">{{ p.likes | length }}</span>
+                    </a>
+{% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

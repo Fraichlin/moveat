@@ -25,6 +25,17 @@ security:
             guard:
                 authenticators:
                     - App\Security\UserLoginAuthenticator
+#        api:
+#            pattern: ^/Api/
+#            stateless: true
+#            anonymous: true
+#            provider: app_user_provider
+#            guard:
+#                authenticators:
+#                    - lexik_jwt_authentication.jwt_token_authenticator
+#            main:
+#                anonymous: lazy
+#                provider: app_user_provider
 
 
 
@@ -40,3 +51,6 @@ security:
          - { path: ^/Admin, roles: ROLE_ADMIN }
          - { path: ^/Coach, roles: ROLE_COACH }
          - { path: ^/Member, roles: ROLE_MEMBER }
+#         - { path: ^/Api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+#         - { path: ^/Api/member, roles: IS_AUTHENTICATED_FULLY }
+#         - { path: ^/Api/coach, roles: IS_AUTHENTICATED_FULLY }

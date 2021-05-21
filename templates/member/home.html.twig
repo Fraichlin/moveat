@@ -18,11 +18,11 @@
         <a class="btn btn-info" href="{{ url('results',{'id':app.user.getId}) }}">
             Découvrer votre programme nutritionel
         </a>
-        <a class="btn btn-info" href="http://127.0.0.1:8001/program/">
+        <a class="btn btn-info" href="{{ url('program') }}">
             Découvrer votre programme sportif
         </a>
-        <a class="btn btn-info" href="http://127.0.0.1:8002/programs/">
-            Découvrer votre programme psychothérapeute
+        <a class="btn btn-info" href="{{ url('programs_index') }}">
+            Découvrer votre programme psychothérapeutique
         </a>
     </div>
 {% endblock %}

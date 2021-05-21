@@ -84,11 +84,6 @@ class NutritionalProgram
      */
     private $comments;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="nutritionalPrograms")
-     */
-    private $nutritionist;
-
 
     public function __construct()
     {
@@ -246,16 +241,16 @@ class NutritionalProgram
         return $this;
     }
 
-    public function getNutritionist(): ?User
-    {
-        return $this->nutritionist;
-    }
-
-    public function setNutritionist(?User $nutritionist): self
-    {
-        $this->nutritionist = $nutritionist;
-
-        return $this;
-    }
+//    public function getNutritionist(): ?User
+//    {
+//        return $this->nutritionist;
+//    }
+//
+//    public function setNutritionist(?User $nutritionist): self
+//    {
+//        $this->nutritionist = $nutritionist;
+//
+//        return $this;
+//    }
 
 }

@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -25,6 +26,7 @@ class User implements UserInterface,\Serializable
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups("post:read")
      */
     private $id;
 
@@ -32,11 +34,13 @@ class User implements UserInterface,\Serializable
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\NotBlank(message="Insérer une adresse email")
      * @Assert\Email(message ="l'email {{ value }} n'est pas valide")
+     * @Groups("post:read")
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+     * @Groups("post:read")
      */
     private $roles = [];
 
@@ -45,6 +49,7 @@ class User implements UserInterface,\Serializable
      * @ORM\Column(type="string")
      * @Assert\Length(min=8, minMessage="Le mot de passe doit avoir 8 caractères au minimum")
      * @Assert\EqualTo(propertyPath="confirm_password", message="Les mots de passe ne correspondent pas")
+     * @Groups("post:read")
      */
     private $password;
 
@@ -57,6 +62,7 @@ class User implements UserInterface,\Serializable
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Insérer un username")
      * @Assert\Length(min=4, max=15, minMessage="Le username doit avoir 4 caractères au minimum",maxMessage="Le login doit avoir 15 caractères au maximum")
+     * @Groups("post:read")
      */
     private $username;
 
@@ -64,6 +70,7 @@ class User implements UserInterface,\Serializable
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\NotBlank(message="Insérer un nom")
      * @Assert\Length(min=4, max=20, minMessage="Le nom doit avoir 4 caractères au minimum",maxMessage="Le nom doit avoir 20 caractères au maximum")
+     * @Groups("post:read")
      */
     private $nom;
 
@@ -71,78 +78,93 @@ class User implements UserInterface,\Serializable
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\NotBlank(message="Insérer un prénom")
      * @Assert\Length(min=4, max=20, minMessage="Le prenom doit avoir 4 caractères au minimum",maxMessage="Le prenom doit avoir 20 caractères au maximum")
+     * @Groups("post:read")
      */
     private $prenom;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank(message="Sélectionner votre sexe")
+     * @Groups("post:read")
      */
     private $sexe;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Assert\Regex(pattern="/^\+216\s\d\d\s\d\d\d\s\d\d\d$/",message="Le numéro doit etre de la forme +216 XX XXX XXX")
+     * @Groups("post:read")
      */
     private $telephone;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Groups("post:read")
      */
     private $taille;
 
     /**
      * @ORM\Column(type="float", nullable=true)
+     * @Groups("post:read")
      */
     private $poids;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups("post:read")
      */
     private $specialite;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups("post:read")
      */
     private $adresse;
 
     /**
      * @ORM\Column(type="string",length=255)
+     * @Groups("post:read")
      */
     private $statut;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups("post:read")
      */
     private $photo;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups("post:read")
      */
     private $justificatif;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups("post:read")
      */
     private $dateInscription;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups("post:read")
      */
     private $dateValidation;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups("post:read")
      */
     private $dateBlocage;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups("post:read")
      */
     private $dateDeblocage;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Groups("post:read")
      */
     protected $updatedAt;
 
@@ -162,6 +184,7 @@ class User implements UserInterface,\Serializable
 
     /**
      * @ORM\Column(type="boolean")
+     * @Groups("post:read")
      */
     private $isVerified = false;
 
@@ -170,10 +193,15 @@ class User implements UserInterface,\Serializable
      */
     private $comments;
 
+//    /**
+//     * @ORM\OneToMany(targetEntity=NutritionalProgram::class, mappedBy="nutritionist")
+//     */
+//    private $nutritionalPrograms;
+
     /**
-     * @ORM\OneToMany(targetEntity=NutritionalProgram::class, mappedBy="nutritionist")
+     * @ORM\OneToMany(targetEntity=Postuler::class, mappedBy="user")
      */
-    private $nutritionalPrograms;
+    private $postulers;
 
     public function __construct()
     {
@@ -187,6 +215,14 @@ class User implements UserInterface,\Serializable
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
     }
 
     public function getEmail(): ?string
@@ -586,30 +622,59 @@ class User implements UserInterface,\Serializable
         return $this;
     }
 
+//    /**
+//     * @return Collection|NutritionalProgram[]
+//     */
+//    public function getNutritionalPrograms(): Collection
+//    {
+//        return $this->nutritionalPrograms;
+//    }
+//
+//    public function addNutritionalProgram(NutritionalProgram $nutritionalProgram): self
+//    {
+//        if (!$this->nutritionalPrograms->contains($nutritionalProgram)) {
+//            $this->nutritionalPrograms[] = $nutritionalProgram;
+//            $nutritionalProgram->setNutritionist($this);
+//        }
+//
+//        return $this;
+//    }
+//
+//    public function removeNutritionalProgram(NutritionalProgram $nutritionalProgram): self
+//    {
+//        if ($this->nutritionalPrograms->removeElement($nutritionalProgram)) {
+//            // set the owning side to null (unless already changed)
+//            if ($nutritionalProgram->getNutritionist() === $this) {
+//                $nutritionalProgram->setNutritionist(null);
+//            }
+//        }
+//
+//        return $this;
+//    }
     /**
-     * @return Collection|NutritionalProgram[]
+     * @return Collection|Postuler[]
      */
-    public function getNutritionalPrograms(): Collection
+    public function getPostulers(): Collection
     {
-        return $this->nutritionalPrograms;
+        return $this->postulers;
     }
 
-    public function addNutritionalProgram(NutritionalProgram $nutritionalProgram): self
+    public function addPostuler(Postuler $postuler): self
     {
-        if (!$this->nutritionalPrograms->contains($nutritionalProgram)) {
-            $this->nutritionalPrograms[] = $nutritionalProgram;
-            $nutritionalProgram->setNutritionist($this);
+        if (!$this->postulers->contains($postuler)) {
+            $this->postulers[] = $postuler;
+            $postuler->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeNutritionalProgram(NutritionalProgram $nutritionalProgram): self
+    public function removePostuler(Postuler $postuler): self
     {
-        if ($this->nutritionalPrograms->removeElement($nutritionalProgram)) {
+        if ($this->postulers->removeElement($postuler)) {
             // set the owning side to null (unless already changed)
-            if ($nutritionalProgram->getNutritionist() === $this) {
-                $nutritionalProgram->setNutritionist(null);
+            if ($postuler->getUser() === $this) {
+                $postuler->setUser(null);
             }
         }
 

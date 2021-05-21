@@ -1,0 +1,13 @@
+{% extends 'base2.html.twig' %}
+
+{% block title %}New Article{% endblock %}
+{% block activation3 %}active{% endblock %}
+{% block body %}
+<section class="wrapper">
+    <h1>Create new Article</h1>
+
+    {{ include('article/_form.html.twig') }}
+
+    <a href="{{ path('article_index') }}">back to list</a>
+</section>
+{% endblock %}

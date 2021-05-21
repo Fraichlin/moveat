@@ -1,0 +1,23 @@
+{% extends 'baseBackend.html.twig' %}
+
+{% block title %}Psychothérapeutes{% endblock %}
+{% block activation4 %}active{% endblock %}
+{% block body %}
+    <h1>Programs</h1>
+
+    <table class="table">
+        <tbody>
+
+        <tr>
+            <th>Program</th>
+            <td>{{ program.Program }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('programs_index') }}">back to list</a>
+
+    <a href="{{ path('programs_edit', {'id': program.id}) }}">edit</a>
+
+    {{ include('programs/_delete_form.html.twig') }}
+{% endblock %}

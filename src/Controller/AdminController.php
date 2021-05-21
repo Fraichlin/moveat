@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Appointment;
 use App\Form\AdminType;
+use App\Form\Appointment1Type;
+use App\Repository\AppointmentRepository;
 use App\Repository\CoachRepository;
 use App\Repository\MembreRepository;
 use App\Repository\UserRepository;
@@ -388,6 +391,59 @@ class AdminController extends AbstractController
         return $this->render('admin/profilAdminMember.html.twig',[
             'member' => $member
         ]);
+    }
+
+    /**
+     * @Route("/appointment/list", name="listRdvAdmin", methods={"GET"})
+     */
+    public function listRdv(AppointmentRepository $appointmentRepository): Response
+    {
+        return $this->render('admin/listrdv.html.twig', [
+            'appointments' => $appointmentRepository->findAll(),
+        ]);
+    }
+
+    /**
+     * @Route("/appointment/{id}", name="appointment_showAdmin", methods={"GET"})
+     */
+    public function showRdv(Appointment $appointment): Response
+    {
+        return $this->render('admin/showRdv.html.twig', [
+            'appointment' => $appointment,
+        ]);
+    }
+
+    /**
+     * @Route("/appointment/{id}/edit", name="appointment_editAdmin", methods={"GET","POST"})
+     */
+    public function editRdv(Request $request, Appointment $appointment): Response
+    {
+        $form = $this->createForm(Appointment1Type::class, $appointment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('listRdv');
+        }
+
+        return $this->render('admin/editRdv.html.twig', [
+            'appointment' => $appointment,
+            'form' => $form->createView(),
+        ]);
+    }
+    /**
+     * @Route("appointment/{id}", name="appointment_deleteAdmin", methods={"DELETE"})
+     */
+    public function deleteRdv(Request $request, Appointment $appointment): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$appointment->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($appointment);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('listRdvAdmin');
     }
 
 }
